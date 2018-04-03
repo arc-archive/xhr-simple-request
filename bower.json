@@ -16,7 +16,7 @@
   "private": false,
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "headers-parser-behavior": "advanced-rest-client/headers-parser-behavior#2.0.0-preview",
+    "headers-parser-behavior": "advanced-rest-client/headers-parser-behavior#^2.0.0",
     "events-target-behavior": "advanced-rest-client/events-target-behavior#^2.0.0"
   },
   "devDependencies": {
