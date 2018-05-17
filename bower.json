@@ -1,6 +1,6 @@
 {
   "name": "xhr-simple-request",
-  "version": "2.0.0-preview",
+  "version": "2.0.0",
   "license": "Apache-2.0",
   "description": "An XHR request that works with API components",
   "main": "xhr-simple-request.html",
