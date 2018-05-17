@@ -48,7 +48,7 @@ declare namespace TransportElements {
    * - response (`Object`) - The response data:
    *  - status (`Number`) - Response status code
    *  - statusText (`String`) - Response status text. Can be empty string.
-   *  - body (`String|Document|ArrayBuffer|Blob`) - Response body
+   *  - payload (`String|Document|ArrayBuffer|Blob`) - Response body
    *  - headers (`String|undefined`) - Response headers
    *
    * Please note that aborting the request always sends `api-response` event
