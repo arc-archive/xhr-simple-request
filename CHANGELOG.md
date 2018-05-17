@@ -1,3 +1,17 @@
+<a name="2.0.0"></a>
+# 2.0.0 (2018-05-17)
+
+
+### Docs
+
+* Updating documentation. ([f9cbaf3d1442ee91383185d5a155e38d41071e9d](https://github.com/advanced-rest-client/xhr-simple-request/commit/f9cbaf3d1442ee91383185d5a155e38d41071e9d))
+
+### Update
+
+* Updated Travis configuration to connect to Sauce Labs. ([7797ea52bcf797cd47f66b9e320bc4f4d1acdb52](https://github.com/advanced-rest-client/xhr-simple-request/commit/7797ea52bcf797cd47f66b9e320bc4f4d1acdb52))
+
+
+
 <a name="0.6.18"></a>
 ## [0.6.18](https://github.com/advanced-rest-client/authorization-panel/compare/0.6.16...0.6.18) (2018-03-16)
 
