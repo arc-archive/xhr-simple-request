@@ -1,3 +1,25 @@
+<a name="2.0.1"></a>
+## 2.0.1 (2018-09-07)
+
+
+### Docs
+
+* Updating documentation. ([f9cbaf3d1442ee91383185d5a155e38d41071e9d](https://github.com/advanced-rest-client/xhr-simple-request/commit/f9cbaf3d1442ee91383185d5a155e38d41071e9d))
+
+### Fix
+
+* Fixing tests configuration ([6c9aec6cc12832c87af09ad5ca03d49e025b7a92](https://github.com/advanced-rest-client/xhr-simple-request/commit/6c9aec6cc12832c87af09ad5ca03d49e025b7a92))
+
+### New
+
+* Adding fixed header to always set with a request ([04a13fe31b9dc2a5f0361908d115edfe6b0ec637](https://github.com/advanced-rest-client/xhr-simple-request/commit/04a13fe31b9dc2a5f0361908d115edfe6b0ec637))
+
+### Update
+
+* Updated Travis configuration to connect to Sauce Labs. ([7797ea52bcf797cd47f66b9e320bc4f4d1acdb52](https://github.com/advanced-rest-client/xhr-simple-request/commit/7797ea52bcf797cd47f66b9e320bc4f4d1acdb52))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2018-05-17)
 
