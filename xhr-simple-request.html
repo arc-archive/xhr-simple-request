@@ -95,7 +95,18 @@ the License.
           type: Object,
           notify: true,
           readOnly: true
-        }
+        },
+        /**
+         * Appends headers to each request handled by this component.
+         *
+         * Example
+         *
+         * ```html
+         * <xhr-simple-request
+         *  append-headers="x-token: 123\nx-api-demo: true"></xhr-simple-request>
+         * ```
+         */
+        appendHeaders: String
       };
     }
 
@@ -126,7 +137,8 @@ the License.
      */
     _requestHandler(e) {
       const opts = e.detail;
-      const request = (document.createElement('xhr-simple-request-transport'));
+      const request = document.createElement('xhr-simple-request-transport');
+      request.appendHeaders = this.appendHeaders;
       request.__opts = opts;
       this.activeRequests.set(opts.id, request);
 

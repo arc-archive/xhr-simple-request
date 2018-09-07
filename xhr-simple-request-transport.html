@@ -30,7 +30,7 @@ the License.
    * @memberof TransportElements
    */
   class XhrSimpleRequestTransport extends ArcBehaviors.HeadersParserBehavior(Polymer.Element) {
-    static get is() { return 'xhr-simple-request-transport'; }
+    static get is() {return 'xhr-simple-request-transport';}
     static get properties() {
       return {
         /**
@@ -158,7 +158,25 @@ the License.
 
         startTime: {
           readOnly: true,
-
+        },
+        /**
+         * Appends headers to each request handled by this component.
+         *
+         * Example
+         *
+         * ```html
+         * <xhr-simple-request
+         *  append-headers="x-token: 123\nx-api-demo: true"></xhr-simple-request>
+         * ```
+         */
+        appendHeaders: String,
+        /**
+         * Computed list of headers to add to each request.
+         * @type {Array<Object>}
+         */
+        _addHeaders: {
+          type: Array,
+          computed: '_computeAddHeaders(appendHeaders)'
         }
       };
     }
@@ -237,22 +255,38 @@ the License.
      * @param {?String} headers HTTP headers string
      */
     _applyHeaders(xhr, headers) {
-      if (!headers || typeof headers !== 'string') {
-        return;
+      const fixed = this._addHeaders;
+      const fixedNames = [];
+      if (fixed && fixed.length) {
+        fixed.forEach((item) => {
+          fixedNames[fixedNames.length] = item.name;
+          try {
+            xhr.setRequestHeader(
+              item.name,
+              item.value
+            );
+          } catch (e) {
+            console.warn(`Header ${item.name} cannot be set with value ${item.value}`);
+          }
+        });
       }
-      const data = this.headersToJSON(headers);
-      data.forEach((item) => {
-        try {
-          xhr.setRequestHeader(
-            item.name,
-            item.value
-          );
-        } catch (e) {
-          console.warn(`Header ${item.name} cannot be set with value ${item.value}`);
-        }
-      });
+      if (headers) {
+        const data = this.headersToJSON(String(headers));
+        data.forEach((item) => {
+          if (fixedNames.indexOf(item.name) !== -1) {
+            return;
+          }
+          try {
+            xhr.setRequestHeader(
+              item.name,
+              item.value
+            );
+          } catch (e) {
+            console.warn(`Header ${item.name} cannot be set with value ${item.value}`);
+          }
+        });
+      }
     }
-
     /**
      * Handler for the XHR `progress` event.
      * It sets `progress` property and dispatches `api-request-progress-changed`
@@ -427,7 +461,19 @@ the License.
       } catch(_) {}
       return data;
     }
-
+    /**
+     * Computes value for `_addHeaders` property.
+     * A list of headers to add to each request.
+     * @param {?String} headers Headers string
+     * @return {Array<Object>|undefined}
+     */
+    _computeAddHeaders(headers) {
+      if (!headers) {
+        return;
+      }
+      headers = String(headers).replace('\\n', '\n');
+      return this.headersToJSON(headers);
+    }
     /**
      * @event api-request-progress-changed
      *
