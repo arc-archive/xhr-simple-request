@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>xhr-simple-request test</title>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <script src="server.js"></script>
+    <link rel="import" href="../xhr-simple-request-transport.html">
+  </head>
+  <body>
+
+    <test-fixture id="Basic">
+      <template>
+        <xhr-simple-request-transport></xhr-simple-request-transport>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="Proxy">
+      <template>
+        <xhr-simple-request-transport proxy="https://api.domain.com/endpoint?url="></xhr-simple-request-transport>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="ProxyEncodes">
+      <template>
+        <xhr-simple-request-transport proxy="https://api.domain.com/endpoint?url=" proxy-encode-url></xhr-simple-request-transport>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('xhr-simple-request-transport', () => {
+        suite('_appendProxy()', () => {
+          test('Transforms URL to add proxy', () => {
+            const element = fixture('Proxy');
+            const result = element._appendProxy('http://test.com');
+            assert.equal(result, 'https://api.domain.com/endpoint?url=http://test.com');
+          });
+
+          test('URL value is encoded', () => {
+            const element = fixture('ProxyEncodes');
+            const result = element._appendProxy('http://test.com');
+            assert.equal(result, 'https://api.domain.com/endpoint?url=http%3A%2F%2Ftest.com');
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
