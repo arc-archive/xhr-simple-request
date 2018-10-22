@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "description": "An XHR request that works with API components",
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.1.1"
+    "@polymer/gen-typescript-declarations": "^1.5.1"
   },
   "private": false,
   "authors": [
