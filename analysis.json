@@ -36,11 +36,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 194,
+              "line": 212,
               "column": 4
             },
             "end": {
-              "line": 204,
+              "line": 222,
               "column": 5
             }
           },
@@ -317,6 +317,48 @@
             "polymer": {
               "readOnly": true,
               "attributeType": "Array"
+            }
+          }
+        },
+        {
+          "name": "proxy",
+          "type": "string | null | undefined",
+          "description": "If set every request made from the console will be proxied by the service provided in this\nvalue.\nIt will prefix entered URL with the proxy value. so the call to\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/path/http://domain.com/path/?query=some+value`\n\nIf the proxy require a to pass the URL as a query parameter define value as follows:\n`https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`\nattribute.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 187,
+              "column": 8
+            },
+            "end": {
+              "line": 187,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "proxyEncodeUrl",
+          "type": "boolean | null | undefined",
+          "description": "If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 193,
+              "column": 8
+            },
+            "end": {
+              "line": 193,
+              "column": 31
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
             }
           }
         }
@@ -621,11 +663,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 197,
               "column": 4
             },
             "end": {
-              "line": 182,
+              "line": 200,
               "column": 5
             }
           },
@@ -641,11 +683,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 219,
+              "line": 237,
               "column": 4
             },
             "end": {
-              "line": 245,
+              "line": 263,
               "column": 5
             }
           },
@@ -667,11 +709,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 270,
               "column": 4
             },
             "end": {
-              "line": 284,
+              "line": 302,
               "column": 5
             }
           },
@@ -697,11 +739,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 291,
+              "line": 309,
               "column": 4
             },
             "end": {
-              "line": 310,
+              "line": 328,
               "column": 5
             }
           },
@@ -722,11 +764,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 316,
+              "line": 334,
               "column": 4
             },
             "end": {
-              "line": 329,
+              "line": 347,
               "column": 5
             }
           },
@@ -748,11 +790,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 335,
+              "line": 353,
               "column": 4
             },
             "end": {
-              "line": 343,
+              "line": 361,
               "column": 5
             }
           },
@@ -774,11 +816,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 349,
+              "line": 367,
               "column": 4
             },
             "end": {
-              "line": 358,
+              "line": 376,
               "column": 5
             }
           },
@@ -794,11 +836,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 364,
+              "line": 382,
               "column": 4
             },
             "end": {
-              "line": 385,
+              "line": 403,
               "column": 5
             }
           },
@@ -814,11 +856,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 390,
+              "line": 408,
               "column": 4
             },
             "end": {
-              "line": 393,
+              "line": 411,
               "column": 5
             }
           },
@@ -834,11 +876,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 398,
+              "line": 416,
               "column": 4
             },
             "end": {
-              "line": 401,
+              "line": 419,
               "column": 5
             }
           },
@@ -854,11 +896,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 416,
+              "line": 434,
               "column": 4
             },
             "end": {
-              "line": 455,
+              "line": 473,
               "column": 5
             }
           },
@@ -875,11 +917,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 461,
+              "line": 479,
               "column": 4
             },
             "end": {
-              "line": 467,
+              "line": 485,
               "column": 5
             }
           },
@@ -895,11 +937,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 474,
+              "line": 492,
               "column": 4
             },
             "end": {
-              "line": 480,
+              "line": 498,
               "column": 5
             }
           },
@@ -913,6 +955,33 @@
           ],
           "return": {
             "type": "(Array.<Object> | undefined)"
+          }
+        },
+        {
+          "name": "_appendProxy",
+          "description": "Sets the proxy URL if the `proxy` property is set.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 504,
+              "column": 4
+            },
+            "end": {
+              "line": 512,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "url",
+              "type": "String",
+              "description": "Request URL to alter if needed."
+            }
+          ],
+          "return": {
+            "type": "String",
+            "desc": "The URL to use with request."
           }
         }
       ],
@@ -930,7 +999,7 @@
           "column": 2
         },
         "end": {
-          "line": 492,
+          "line": 524,
           "column": 3
         }
       },
@@ -1131,6 +1200,38 @@
           },
           "metadata": {},
           "type": "string | null | undefined"
+        },
+        {
+          "name": "proxy",
+          "description": "If set every request made from the console will be proxied by the service provided in this\nvalue.\nIt will prefix entered URL with the proxy value. so the call to\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/path/http://domain.com/path/?query=some+value`\n\nIf the proxy require a to pass the URL as a query parameter define value as follows:\n`https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`\nattribute.",
+          "sourceRange": {
+            "start": {
+              "line": 187,
+              "column": 8
+            },
+            "end": {
+              "line": 187,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "proxy-encode-url",
+          "description": "If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`",
+          "sourceRange": {
+            "start": {
+              "line": 193,
+              "column": 8
+            },
+            "end": {
+              "line": 193,
+              "column": 31
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [
@@ -1290,6 +1391,48 @@
               "attributeType": "String"
             }
           }
+        },
+        {
+          "name": "proxy",
+          "type": "string | null | undefined",
+          "description": "If set every request made from the console will be proxied by the service provided in this\nvalue.\nIt will prefix entered URL with the proxy value. so the call to\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/path/http://domain.com/path/?query=some+value`\n\nIf the proxy require a to pass the URL as a query parameter define value as follows:\n`https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`\nattribute.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 120,
+              "column": 8
+            },
+            "end": {
+              "line": 120,
+              "column": 21
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "proxyEncodeUrl",
+          "type": "boolean | null | undefined",
+          "description": "If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 126,
+              "column": 8
+            },
+            "end": {
+              "line": 126,
+              "column": 31
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
         }
       ],
       "methods": [
@@ -1371,11 +1514,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 141,
               "column": 4
             },
             "end": {
-              "line": 126,
+              "line": 144,
               "column": 5
             }
           },
@@ -1395,11 +1538,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 128,
+              "line": 146,
               "column": 4
             },
             "end": {
-              "line": 131,
+              "line": 149,
               "column": 5
             }
           },
@@ -1419,11 +1562,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 118,
+              "line": 136,
               "column": 4
             },
             "end": {
-              "line": 121,
+              "line": 139,
               "column": 5
             }
           },
@@ -1434,16 +1577,36 @@
           }
         },
         {
+          "name": "_createRequest",
+          "description": "Creates instance of transport object with current configuration.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 154,
+              "column": 4
+            },
+            "end": {
+              "line": 160,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "XhrSimpleRequestTransport"
+          }
+        },
+        {
           "name": "_requestHandler",
           "description": "Handles for the `api-request` custom event. Transports the request.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 137,
+              "line": 167,
               "column": 4
             },
             "end": {
-              "line": 157,
+              "line": 186,
               "column": 5
             }
           },
@@ -1464,11 +1627,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 164,
+              "line": 193,
               "column": 4
             },
             "end": {
-              "line": 176,
+              "line": 205,
               "column": 5
             }
           },
@@ -1489,11 +1652,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 184,
+              "line": 213,
               "column": 4
             },
             "end": {
-              "line": 198,
+              "line": 227,
               "column": 5
             }
           },
@@ -1521,11 +1684,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 204,
+              "line": 233,
               "column": 4
             },
             "end": {
-              "line": 210,
+              "line": 239,
               "column": 5
             }
           },
@@ -1547,11 +1710,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 217,
+              "line": 246,
               "column": 4
             },
             "end": {
-              "line": 229,
+              "line": 258,
               "column": 5
             }
           },
@@ -1578,11 +1741,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 235,
+              "line": 264,
               "column": 4
             },
             "end": {
-              "line": 242,
+              "line": 271,
               "column": 5
             }
           },
@@ -1604,11 +1767,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 248,
+              "line": 277,
               "column": 4
             },
             "end": {
-              "line": 250,
+              "line": 279,
               "column": 5
             }
           },
@@ -1639,7 +1802,7 @@
           "column": 2
         },
         "end": {
-          "line": 259,
+          "line": 287,
           "column": 3
         }
       },
@@ -1728,6 +1891,38 @@
           },
           "metadata": {},
           "type": "string | null | undefined"
+        },
+        {
+          "name": "proxy",
+          "description": "If set every request made from the console will be proxied by the service provided in this\nvalue.\nIt will prefix entered URL with the proxy value. so the call to\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/path/http://domain.com/path/?query=some+value`\n\nIf the proxy require a to pass the URL as a query parameter define value as follows:\n`https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`\nattribute.",
+          "sourceRange": {
+            "start": {
+              "line": 120,
+              "column": 8
+            },
+            "end": {
+              "line": 120,
+              "column": 21
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "proxy-encode-url",
+          "description": "If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`",
+          "sourceRange": {
+            "start": {
+              "line": 126,
+              "column": 8
+            },
+            "end": {
+              "line": 126,
+              "column": 31
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [

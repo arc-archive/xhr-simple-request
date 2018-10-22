@@ -173,7 +173,25 @@ the License.
         _addHeaders: {
           type: Array,
           computed: '_computeAddHeaders(appendHeaders)'
-        }
+        },
+        /**
+         * If set every request made from the console will be proxied by the service provided in this
+         * value.
+         * It will prefix entered URL with the proxy value. so the call to
+         * `http://domain.com/path/?query=some+value` will become
+         * `https://proxy.com/path/http://domain.com/path/?query=some+value`
+         *
+         * If the proxy require a to pass the URL as a query parameter define value as follows:
+         * `https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`
+         * attribute.
+         */
+        proxy: String,
+        /**
+         * If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.
+         * `http://domain.com/path/?query=some+value` will become
+         * `https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`
+         */
+        proxyEncodeUrl: Boolean
       };
     }
 
@@ -228,10 +246,10 @@ the License.
       xhr.addEventListener('abort', () => this._abortHandler());
       // Called after all of the above.
       xhr.addEventListener('loadend', () => this._loadEndHandler());
-      this.url = options.url;
+      const url = this._appendProxy(options.url);
       xhr.open(
         options.method || 'GET',
-        options.url,
+        url,
         true
       );
       this._applyHeaders(xhr, options.headers);
@@ -463,7 +481,7 @@ the License.
       let data;
       try {
         data = this.xhr.getAllResponseHeaders();
-      } catch(_) {}
+      } catch (_) {}
       return data;
     }
     /**
@@ -478,6 +496,20 @@ the License.
       }
       headers = String(headers).replace('\\n', '\n');
       return this.headersToJSON(headers);
+    }
+    /**
+     * Sets the proxy URL if the `proxy` property is set.
+     * @param {String} url Request URL to alter if needed.
+     * @return {String} The URL to use with request.
+     */
+    _appendProxy(url) {
+      const proxy = this.proxy;
+      if (!proxy) {
+        return url;
+      }
+      let result = this.proxyEncodeUrl ? encodeURIComponent(url) : url;
+      result = proxy + result;
+      return result;
     }
     /**
      * @event api-request-progress-changed

@@ -106,7 +106,25 @@ the License.
          *  append-headers="x-token: 123\nx-api-demo: true"></xhr-simple-request>
          * ```
          */
-        appendHeaders: String
+        appendHeaders: String,
+        /**
+         * If set every request made from the console will be proxied by the service provided in this
+         * value.
+         * It will prefix entered URL with the proxy value. so the call to
+         * `http://domain.com/path/?query=some+value` will become
+         * `https://proxy.com/path/http://domain.com/path/?query=some+value`
+         *
+         * If the proxy require a to pass the URL as a query parameter define value as follows:
+         * `https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`
+         * attribute.
+         */
+        proxy: String,
+        /**
+         * If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.
+         * `http://domain.com/path/?query=some+value` will become
+         * `https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`
+         */
+        proxyEncodeUrl: Boolean
       };
     }
 
@@ -131,6 +149,18 @@ the License.
       node.removeEventListener('abort-api-request', this._aborthHandler);
     }
     /**
+     * Creates instance of transport object with current configuration.
+     * @return {XhrSimpleRequestTransport}
+     */
+    _createRequest() {
+      const request = document.createElement('xhr-simple-request-transport');
+      request.appendHeaders = this.appendHeaders;
+      request.proxy = this.proxy;
+      request.proxyEncodeUrl = this.proxyEncodeUrl;
+      return request;
+    }
+
+    /**
      * Handles for the `api-request` custom event. Transports the request.
      *
      * @param {CustomEvent} e
@@ -141,8 +171,7 @@ the License.
       }
       e.preventDefault();
       const opts = e.detail;
-      const request = document.createElement('xhr-simple-request-transport');
-      request.appendHeaders = this.appendHeaders;
+      const request = this._createRequest();
       request.__opts = opts;
       this.activeRequests.set(opts.id, request);
 
@@ -249,7 +278,6 @@ the License.
     _discardRequest(id) {
       this.activeRequests.delete(id);
     }
-
     /**
      * @event api-response
      *
