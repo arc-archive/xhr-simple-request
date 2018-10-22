@@ -1,10 +1,10 @@
 {
   "name": "@api-components/xhr-simple-request",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "Apache-2.0",
   "description": "An XHR request that works with API components",
   "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.1.1"
+    "@polymer/gen-typescript-declarations": "^1.5.1"
   },
   "private": false,
   "authors": [
