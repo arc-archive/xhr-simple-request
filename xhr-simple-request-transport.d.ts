@@ -96,7 +96,23 @@ declare namespace TransportElements {
      * TimedOut will be true if the XHR threw a timeout event.
      */
     readonly timedOut: boolean|null|undefined;
-    readonly startTime: any;
+
+    /**
+     * Appends headers to each request handled by this component.
+     *
+     * Example
+     *
+     * ```html
+     * <xhr-simple-request
+     *  append-headers="x-token: 123\nx-api-demo: true"></xhr-simple-request>
+     * ```
+     */
+    appendHeaders: string|null|undefined;
+
+    /**
+     * Computed list of headers to add to each request.
+     */
+    readonly _addHeaders: Array<object|null>|null;
     ready(): void;
 
     /**
@@ -182,6 +198,14 @@ declare namespace TransportElements {
      * Collects response headers string from the XHR object.
      */
     collectHeaders(): String|null|undefined;
+
+    /**
+     * Computes value for `_addHeaders` property.
+     * A list of headers to add to each request.
+     *
+     * @param headers Headers string
+     */
+    _computeAddHeaders(headers: String|null): Array<object|null>|null|undefined;
   }
 }
 

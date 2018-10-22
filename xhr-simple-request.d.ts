@@ -74,6 +74,18 @@ declare namespace TransportElements {
      * Latest used request object.
      */
     readonly lastRequest: XhrSimpleRequestTransport|null;
+
+    /**
+     * Appends headers to each request handled by this component.
+     *
+     * Example
+     *
+     * ```html
+     * <xhr-simple-request
+     *  append-headers="x-token: 123\nx-api-demo: true"></xhr-simple-request>
+     * ```
+     */
+    appendHeaders: string|null|undefined;
     _attachListeners(node: any): void;
     _detachListeners(node: any): void;
     ready(): void;
@@ -82,7 +94,13 @@ declare namespace TransportElements {
      * Handles for the `api-request` custom event. Transports the request.
      */
     _requestHandler(e: CustomEvent|null): void;
-    _aborthHandler(e: any): void;
+
+    /**
+     * Handler for `abort-api-request` event. Aborts the request and reports
+     * errored response.
+     * It expects the event to have `id` property set on the detail object.
+     */
+    _aborthHandler(e: CustomEvent|null): void;
 
     /**
      * Creates a detail object for `api-response` cutom event

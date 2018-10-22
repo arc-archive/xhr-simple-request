@@ -36,11 +36,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 194,
               "column": 4
             },
             "end": {
-              "line": 190,
+              "line": 204,
               "column": 5
             }
           },
@@ -278,23 +278,45 @@
           "defaultValue": "false"
         },
         {
-          "name": "startTime",
-          "type": "?",
-          "description": "",
+          "name": "appendHeaders",
+          "type": "string | null | undefined",
+          "description": "Appends headers to each request handled by this component.\n\nExample\n\n```html\n<xhr-simple-request\n append-headers=\"x-token: 123\\nx-api-demo: true\"></xhr-simple-request>\n```",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 158,
+              "line": 167,
               "column": 8
             },
             "end": {
-              "line": 161,
+              "line": 167,
+              "column": 29
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "_addHeaders",
+          "type": "Array.<Object>",
+          "description": "Computed list of headers to add to each request.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 172,
+              "column": 8
+            },
+            "end": {
+              "line": 175,
               "column": 9
             }
           },
           "metadata": {
             "polymer": {
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Array"
             }
           }
         }
@@ -340,7 +362,7 @@
               "column": 4
             },
             "end": {
-              "line": 122,
+              "line": 110,
               "column": 5
             }
           },
@@ -359,17 +381,46 @@
           "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
         },
         {
+          "name": "headerItemToString",
+          "description": "Transforms a header model item to a string.\nArray values are supported.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "start": {
+              "line": 118,
+              "column": 4
+            },
+            "end": {
+              "line": 132,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "header",
+              "type": "Object",
+              "description": "Object with name and value."
+            }
+          ],
+          "return": {
+            "type": "String",
+            "desc": "Generated headers line"
+          },
+          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+        },
+        {
           "name": "headersToJSON",
           "description": "Parse HTTP headers input from string to array of objects containing `name` and `value`\nproperties.",
           "privacy": "public",
           "sourceRange": {
             "file": "../headers-parser-behavior/headers-parser-behavior.html",
             "start": {
-              "line": 131,
+              "line": 142,
               "column": 4
             },
             "end": {
-              "line": 137,
+              "line": 148,
               "column": 5
             }
           },
@@ -394,11 +445,11 @@
           "sourceRange": {
             "file": "../headers-parser-behavior/headers-parser-behavior.html",
             "start": {
-              "line": 142,
+              "line": 153,
               "column": 4
             },
             "end": {
-              "line": 174,
+              "line": 185,
               "column": 5
             }
           },
@@ -417,11 +468,11 @@
           "sourceRange": {
             "file": "../headers-parser-behavior/headers-parser-behavior.html",
             "start": {
-              "line": 179,
+              "line": 190,
               "column": 4
             },
             "end": {
-              "line": 202,
+              "line": 213,
               "column": 5
             }
           },
@@ -440,11 +491,11 @@
           "sourceRange": {
             "file": "../headers-parser-behavior/headers-parser-behavior.html",
             "start": {
-              "line": 212,
+              "line": 223,
               "column": 4
             },
             "end": {
-              "line": 226,
+              "line": 237,
               "column": 5
             }
           },
@@ -474,11 +525,11 @@
           "sourceRange": {
             "file": "../headers-parser-behavior/headers-parser-behavior.html",
             "start": {
-              "line": 234,
+              "line": 245,
               "column": 4
             },
             "end": {
-              "line": 255,
+              "line": 266,
               "column": 5
             }
           },
@@ -503,11 +554,11 @@
           "sourceRange": {
             "file": "../headers-parser-behavior/headers-parser-behavior.html",
             "start": {
-              "line": 266,
+              "line": 277,
               "column": 4
             },
             "end": {
-              "line": 300,
+              "line": 311,
               "column": 5
             }
           },
@@ -542,11 +593,11 @@
           "sourceRange": {
             "file": "../headers-parser-behavior/headers-parser-behavior.html",
             "start": {
-              "line": 306,
+              "line": 317,
               "column": 4
             },
             "end": {
-              "line": 340,
+              "line": 351,
               "column": 5
             }
           },
@@ -570,11 +621,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 165,
+              "line": 179,
               "column": 4
             },
             "end": {
-              "line": 168,
+              "line": 182,
               "column": 5
             }
           },
@@ -590,11 +641,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 205,
+              "line": 219,
               "column": 4
             },
             "end": {
-              "line": 231,
+              "line": 245,
               "column": 5
             }
           },
@@ -616,11 +667,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 238,
+              "line": 252,
               "column": 4
             },
             "end": {
-              "line": 253,
+              "line": 284,
               "column": 5
             }
           },
@@ -646,11 +697,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 261,
+              "line": 291,
               "column": 4
             },
             "end": {
-              "line": 277,
+              "line": 310,
               "column": 5
             }
           },
@@ -671,11 +722,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 283,
+              "line": 316,
               "column": 4
             },
             "end": {
-              "line": 293,
+              "line": 329,
               "column": 5
             }
           },
@@ -697,11 +748,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 299,
+              "line": 335,
               "column": 4
             },
             "end": {
-              "line": 307,
+              "line": 343,
               "column": 5
             }
           },
@@ -723,11 +774,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 313,
+              "line": 349,
               "column": 4
             },
             "end": {
-              "line": 322,
+              "line": 358,
               "column": 5
             }
           },
@@ -743,11 +794,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 328,
+              "line": 364,
               "column": 4
             },
             "end": {
-              "line": 346,
+              "line": 385,
               "column": 5
             }
           },
@@ -763,11 +814,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 351,
+              "line": 390,
               "column": 4
             },
             "end": {
-              "line": 354,
+              "line": 393,
               "column": 5
             }
           },
@@ -783,11 +834,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 359,
+              "line": 398,
               "column": 4
             },
             "end": {
-              "line": 362,
+              "line": 401,
               "column": 5
             }
           },
@@ -803,11 +854,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 377,
+              "line": 416,
               "column": 4
             },
             "end": {
-              "line": 416,
+              "line": 455,
               "column": 5
             }
           },
@@ -824,11 +875,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 422,
+              "line": 461,
               "column": 4
             },
             "end": {
-              "line": 428,
+              "line": 467,
               "column": 5
             }
           },
@@ -836,6 +887,32 @@
           "params": [],
           "return": {
             "type": "(String | undefined)"
+          }
+        },
+        {
+          "name": "_computeAddHeaders",
+          "description": "Computes value for `_addHeaders` property.\nA list of headers to add to each request.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 474,
+              "column": 4
+            },
+            "end": {
+              "line": 480,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "headers",
+              "type": "?String",
+              "description": "Headers string"
+            }
+          ],
+          "return": {
+            "type": "(Array.<Object> | undefined)"
           }
         }
       ],
@@ -853,7 +930,7 @@
           "column": 2
         },
         "end": {
-          "line": 441,
+          "line": 492,
           "column": 3
         }
       },
@@ -1040,19 +1117,20 @@
           "type": "boolean | null | undefined"
         },
         {
-          "name": "start-time",
-          "description": "",
+          "name": "append-headers",
+          "description": "Appends headers to each request handled by this component.\n\nExample\n\n```html\n<xhr-simple-request\n append-headers=\"x-token: 123\\nx-api-demo: true\"></xhr-simple-request>\n```",
           "sourceRange": {
             "start": {
-              "line": 158,
+              "line": 167,
               "column": 8
             },
             "end": {
-              "line": 161,
-              "column": 9
+              "line": 167,
+              "column": 29
             }
           },
-          "metadata": {}
+          "metadata": {},
+          "type": "string | null | undefined"
         }
       ],
       "events": [
@@ -1191,6 +1269,27 @@
               "attributeType": "Object"
             }
           }
+        },
+        {
+          "name": "appendHeaders",
+          "type": "string | null | undefined",
+          "description": "Appends headers to each request handled by this component.\n\nExample\n\n```html\n<xhr-simple-request\n append-headers=\"x-token: 123\\nx-api-demo: true\"></xhr-simple-request>\n```",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 108,
+              "column": 8
+            },
+            "end": {
+              "line": 108,
+              "column": 29
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "String"
+            }
+          }
         }
       ],
       "methods": [
@@ -1272,11 +1371,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 112,
+              "line": 123,
               "column": 4
             },
             "end": {
-              "line": 115,
+              "line": 126,
               "column": 5
             }
           },
@@ -1296,11 +1395,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 117,
+              "line": 128,
               "column": 4
             },
             "end": {
-              "line": 120,
+              "line": 131,
               "column": 5
             }
           },
@@ -1320,11 +1419,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 107,
+              "line": 118,
               "column": 4
             },
             "end": {
-              "line": 110,
+              "line": 121,
               "column": 5
             }
           },
@@ -1340,11 +1439,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 126,
+              "line": 137,
               "column": 4
             },
             "end": {
-              "line": 141,
+              "line": 157,
               "column": 5
             }
           },
@@ -1361,22 +1460,23 @@
         },
         {
           "name": "_aborthHandler",
-          "description": "",
+          "description": "Handler for `abort-api-request` event. Aborts the request and reports\nerrored response.\nIt expects the event to have `id` property set on the detail object.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 143,
+              "line": 164,
               "column": 4
             },
             "end": {
-              "line": 151,
+              "line": 176,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "e"
+              "name": "e",
+              "type": "CustomEvent"
             }
           ],
           "return": {
@@ -1389,11 +1489,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 184,
               "column": 4
             },
             "end": {
-              "line": 173,
+              "line": 198,
               "column": 5
             }
           },
@@ -1421,11 +1521,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 204,
               "column": 4
             },
             "end": {
-              "line": 185,
+              "line": 210,
               "column": 5
             }
           },
@@ -1447,11 +1547,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 192,
+              "line": 217,
               "column": 4
             },
             "end": {
-              "line": 204,
+              "line": 229,
               "column": 5
             }
           },
@@ -1478,11 +1578,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 210,
+              "line": 235,
               "column": 4
             },
             "end": {
-              "line": 218,
+              "line": 242,
               "column": 5
             }
           },
@@ -1504,11 +1604,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 224,
+              "line": 248,
               "column": 4
             },
             "end": {
-              "line": 226,
+              "line": 250,
               "column": 5
             }
           },
@@ -1539,7 +1639,7 @@
           "column": 2
         },
         "end": {
-          "line": 235,
+          "line": 259,
           "column": 3
         }
       },
@@ -1612,6 +1712,22 @@
           },
           "metadata": {},
           "type": "XhrSimpleRequestTransport"
+        },
+        {
+          "name": "append-headers",
+          "description": "Appends headers to each request handled by this component.\n\nExample\n\n```html\n<xhr-simple-request\n append-headers=\"x-token: 123\\nx-api-demo: true\"></xhr-simple-request>\n```",
+          "sourceRange": {
+            "start": {
+              "line": 108,
+              "column": 8
+            },
+            "end": {
+              "line": 108,
+              "column": 29
+            }
+          },
+          "metadata": {},
+          "type": "string | null | undefined"
         }
       ],
       "events": [
