@@ -29,6 +29,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="AppendHeaders">
+      <template>
+        <xhr-simple-request-transport append-headers="x-a: test1\nx-b: test2"></xhr-simple-request-transport>
+      </template>
+    </test-fixture>
+
     <script>
       suite('xhr-simple-request-transport', () => {
         suite('_appendProxy()', () => {
@@ -42,6 +48,27 @@
             const element = fixture('ProxyEncodes');
             const result = element._appendProxy('http://test.com');
             assert.equal(result, 'https://api.domain.com/endpoint?url=http%3A%2F%2Ftest.com');
+          });
+        });
+
+        suite('_computeAddHeaders()', () => {
+          let element;
+          setup(() => {
+            element = fixture('AppendHeaders');
+          });
+
+          test('_addHeaders is computed', () => {
+            assert.typeOf(element._addHeaders, 'array', 'Value is set');
+            assert.lengthOf(element._addHeaders, 2, 'Value has 2 items');
+          });
+
+          test('Computes headers', () => {
+            const header1 = element._addHeaders[0];
+            const header2 = element._addHeaders[1];
+            assert.equal(header1.name, 'x-a');
+            assert.equal(header2.name, 'x-b');
+            assert.equal(header1.value, 'test1');
+            assert.equal(header2.value, 'test2');
           });
         });
       });

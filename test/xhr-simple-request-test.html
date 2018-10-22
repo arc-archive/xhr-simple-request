@@ -29,6 +29,12 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="AppendHeaders">
+      <template>
+        <xhr-simple-request append-headers="x-a: test1\nx-b: test2"></xhr-simple-request>
+      </template>
+    </test-fixture>
+
     <script>
       suite('xhr-simple-request', () => {
         let lastId = 0;
@@ -242,6 +248,14 @@
             const element = fixture('ProxyEncodes');
             const request = element._createRequest();
             assert.isTrue(request.proxyEncodeUrl);
+          });
+        });
+
+        suite('"appendHeaders" property', () => {
+          test('Passes appendHeaders information to the transport object', () => {
+            const element = fixture('AppendHeaders');
+            const request = element._createRequest();
+            assert.equal(request.appendHeaders, 'x-a: test1\\nx-b: test2');
           });
         });
 
