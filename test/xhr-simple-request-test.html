@@ -23,12 +23,12 @@
         function fire(detail) {
           detail.id = 'request' + (++lastId);
           const e = new CustomEvent('api-request', {
-            cancelable: false,
+            cancelable: true,
             bubbles: true,
             composed: true,
             detail: detail
           });
-          this.dispatchEvent(e);
+          document.body.dispatchEvent(e);
         }
 
         suite('Success requests', () => {
@@ -50,13 +50,13 @@
               method: 'GET'
             };
             fire(request);
-            window.addEventListener('api-response', function clb(e) {
-              window.removeEventListener('api-response', clb);
+            element.addEventListener('api-response', function clb(e) {
+              element.removeEventListener('api-response', clb);
               const data = e.detail;
               assert.isFalse(data.isError, 'isError is set');
-              assert.typeOf(data.loadingTime, 'number','loadingTime is set');
+              assert.typeOf(data.loadingTime, 'number', 'loadingTime is set');
               assert.isTrue(data.request === request, 'passes request object');
-              assert.typeOf(data.response, 'object','response is set');
+              assert.typeOf(data.response, 'object', 'response is set');
               assert.isUndefined(data.error, 'error is undefined');
               assert.equal(data.id, 'request' + lastId, 'id is set');
               done();
@@ -69,8 +69,8 @@
               method: 'GET'
             };
             fire(request);
-            window.addEventListener('api-response', function clb(e) {
-              window.removeEventListener('api-response', clb);
+            element.addEventListener('api-response', function clb(e) {
+              element.removeEventListener('api-response', clb);
               const data = e.detail.response;
               assert.equal(data.status, 200, 'status is set');
               assert.equal(data.statusText, 'OK', 'statusText is set');
@@ -86,8 +86,8 @@
               method: 'GET'
             };
             fire(request);
-            window.addEventListener('api-response', function clb(e) {
-              window.removeEventListener('api-response', clb);
+            element.addEventListener('api-response', function clb(e) {
+              element.removeEventListener('api-response', clb);
               const data = e.detail.response;
               assert.equal(data.status, 200, 'status is set');
               assert.equal(data.statusText, 'OK', 'statusText is set');
@@ -103,8 +103,8 @@
               method: 'GET'
             };
             fire(request);
-            window.addEventListener('api-response', function clb(e) {
-              window.removeEventListener('api-response', clb);
+            element.addEventListener('api-response', function clb(e) {
+              element.removeEventListener('api-response', clb);
               const data = e.detail.response;
               assert.equal(data.status, 200, 'status is set');
               assert.equal(data.statusText, 'OK', 'statusText is set');
@@ -123,8 +123,8 @@
               headers: 'Content-Type: plain/text'
             };
             fire(request);
-            window.addEventListener('api-response', function clb(e) {
-              window.removeEventListener('api-response', clb);
+            element.addEventListener('api-response', function clb(e) {
+              element.removeEventListener('api-response', clb);
               const data = e.detail.response;
               assert.equal(data.payload, body, 'payload is set');
               done();
