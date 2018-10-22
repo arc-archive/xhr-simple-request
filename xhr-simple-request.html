@@ -136,6 +136,10 @@ the License.
      * @param {CustomEvent} e
      */
     _requestHandler(e) {
+      if (e.defaultPrevented) {
+        return;
+      }
+      e.preventDefault();
       const opts = e.detail;
       const request = document.createElement('xhr-simple-request-transport');
       request.appendHeaders = this.appendHeaders;
@@ -152,8 +156,17 @@ the License.
       this._setLastRequest(request);
       this._setLoading(true);
     }
-
+    /**
+     * Handler for `abort-api-request` event. Aborts the request and reports
+     * errored response.
+     * It expects the event to have `id` property set on the detail object.
+     * @param {CustomEvent} e
+     */
     _aborthHandler(e) {
+      if (e.defaultPrevented) {
+        return;
+      }
+      e.preventDefault();
       const id = e.detail.id;
       const request = this.activeRequests.get(id);
       if (!request) {
@@ -222,10 +235,9 @@ the License.
      */
     _notifyResponse(detail) {
       const e = new CustomEvent('api-response', {
-        cancelable: false,
         bubbles: true,
         composed: true,
-        detail: detail
+        detail
       });
       this.dispatchEvent(e);
     }
