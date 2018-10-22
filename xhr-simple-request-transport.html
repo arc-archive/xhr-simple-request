@@ -155,10 +155,6 @@ the License.
           readOnly: true,
           value: false
         },
-
-        startTime: {
-          readOnly: true,
-        },
         /**
          * Appends headers to each request handled by this component.
          *
@@ -242,7 +238,7 @@ the License.
       xhr.timeout = options.timeout;
       xhr.withCredentials = !!options.withCredentials;
       try {
-        xhr.send((options.payload));
+        xhr.send(options.payload);
       } catch (e) {
         this._errorHandler(e);
       }
@@ -294,6 +290,9 @@ the License.
      * @param {ProgressEvent} progress
      */
     _progressHandler(progress) {
+      if (this.aborted) {
+        return;
+      }
       this._setProgress({
         lengthComputable: progress.lengthComputable,
         loaded: progress.loaded,
@@ -316,6 +315,9 @@ the License.
      * @param {ProgressEvent} error https://xhr.spec.whatwg.org/#event-xhr-error
      */
     _errorHandler(error) {
+      if (this.aborted) {
+        return;
+      }
       this._setErrored(true);
       this._updateStatus();
       this._setHeaders(this.collectHeaders());
@@ -348,7 +350,7 @@ the License.
     _abortHandler() {
       this._setAborted(true);
       this._updateStatus();
-      const error = new Error('Request aborted.');
+      const error = new Error('Request aborted');
       const response = {
         error: error,
         request: this.xhr
@@ -361,6 +363,9 @@ the License.
      * @param {ProgressEvent} error https://xhr.spec.whatwg.org/#event-xhr-loadend
      */
     _loadEndHandler() {
+      if (this.aborted || this.timedOut) {
+        return;
+      }
       this._updateStatus();
       this._setHeaders(this.collectHeaders());
       this._setResponse(this.parseResponse());
