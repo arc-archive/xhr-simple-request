@@ -4,7 +4,7 @@
     {
       "description": "`xhr-simple-request`\nA XHR request that works with API components.\n\nThis is a copy of `iron-request` element from PolymerElements library but\nadjusted to work with `API request` object (or ARC request object).\n\nIt also handles custom events related to request flow.",
       "summary": "",
-      "path": "xhr-simple-request-transport.html",
+      "path": "xhr-simple-request-transport.js",
       "properties": [
         {
           "name": "isPayload",
@@ -12,13 +12,13 @@
           "description": "Set to true when the request can carry a payload.\nIt's required for calculating headers errors.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 56,
+              "line": 47,
               "column": 8
             },
             "end": {
-              "line": 56,
+              "line": 47,
               "column": 26
             }
           },
@@ -27,7 +27,7 @@
               "attributeType": "Boolean"
             }
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "succeeded",
@@ -36,12 +36,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 212,
-              "column": 4
+              "line": 213,
+              "column": 2
             },
             "end": {
-              "line": 222,
-              "column": 5
+              "line": 223,
+              "column": 3
             }
           },
           "metadata": {
@@ -57,12 +57,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 41,
-              "column": 8
+              "line": 42,
+              "column": 6
             },
             "end": {
-              "line": 47,
-              "column": 9
+              "line": 48,
+              "column": 7
             }
           },
           "metadata": {
@@ -79,12 +79,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 56,
-              "column": 8
+              "line": 57,
+              "column": 6
             },
             "end": {
-              "line": 62,
-              "column": 9
+              "line": 63,
+              "column": 7
             }
           },
           "metadata": {
@@ -102,12 +102,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 71,
-              "column": 8
+              "line": 72,
+              "column": 6
             },
             "end": {
-              "line": 74,
-              "column": 9
+              "line": 75,
+              "column": 7
             }
           },
           "metadata": {
@@ -124,12 +124,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 79,
-              "column": 8
+              "line": 80,
+              "column": 6
             },
             "end": {
-              "line": 83,
-              "column": 9
+              "line": 84,
+              "column": 7
             }
           },
           "metadata": {
@@ -147,12 +147,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 88,
-              "column": 8
+              "line": 89,
+              "column": 6
             },
             "end": {
-              "line": 92,
-              "column": 9
+              "line": 93,
+              "column": 7
             }
           },
           "metadata": {
@@ -170,12 +170,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 105,
-              "column": 8
+              "line": 106,
+              "column": 6
             },
             "end": {
-              "line": 114,
-              "column": 9
+              "line": 115,
+              "column": 7
             }
           },
           "metadata": {
@@ -192,12 +192,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 122,
-              "column": 8
+              "line": 123,
+              "column": 6
             },
             "end": {
-              "line": 128,
-              "column": 9
+              "line": 129,
+              "column": 7
             }
           },
           "metadata": {
@@ -215,12 +215,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 133,
-              "column": 8
+              "line": 134,
+              "column": 6
             },
             "end": {
-              "line": 137,
-              "column": 9
+              "line": 138,
+              "column": 7
             }
           },
           "metadata": {
@@ -238,12 +238,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 143,
-              "column": 8
+              "line": 144,
+              "column": 6
             },
             "end": {
-              "line": 147,
-              "column": 9
+              "line": 148,
+              "column": 7
             }
           },
           "metadata": {
@@ -261,12 +261,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 152,
-              "column": 8
+              "line": 153,
+              "column": 6
             },
             "end": {
-              "line": 156,
-              "column": 9
+              "line": 157,
+              "column": 7
             }
           },
           "metadata": {
@@ -284,12 +284,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 167,
-              "column": 8
+              "line": 168,
+              "column": 6
             },
             "end": {
-              "line": 167,
-              "column": 29
+              "line": 168,
+              "column": 27
             }
           },
           "metadata": {
@@ -305,12 +305,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 172,
-              "column": 8
+              "line": 173,
+              "column": 6
             },
             "end": {
-              "line": 175,
-              "column": 9
+              "line": 176,
+              "column": 7
             }
           },
           "metadata": {
@@ -327,12 +327,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 187,
-              "column": 8
+              "line": 188,
+              "column": 6
             },
             "end": {
-              "line": 187,
-              "column": 21
+              "line": 188,
+              "column": 19
             }
           },
           "metadata": {
@@ -348,12 +348,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 193,
-              "column": 8
+              "line": 194,
+              "column": 6
             },
             "end": {
-              "line": 193,
-              "column": 31
+              "line": 194,
+              "column": 29
             }
           },
           "metadata": {
@@ -369,13 +369,13 @@
           "description": "Filter array of headers and return not duplicated array of the same headers.\nDuplicated headers should be appended to already found one using coma separator.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 69,
+              "line": 60,
               "column": 4
             },
             "end": {
-              "line": 88,
+              "line": 79,
               "column": 5
             }
           },
@@ -391,20 +391,20 @@
             "type": "Array",
             "desc": "An array of filtered headers."
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "headersToString",
           "description": "Parse headers array to Raw HTTP headers string.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 96,
+              "line": 87,
               "column": 4
             },
             "end": {
-              "line": 110,
+              "line": 101,
               "column": 5
             }
           },
@@ -420,20 +420,20 @@
             "type": "String",
             "desc": "A HTTP representation of the headers."
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "headerItemToString",
           "description": "Transforms a header model item to a string.\nArray values are supported.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 118,
+              "line": 109,
               "column": 4
             },
             "end": {
-              "line": 132,
+              "line": 123,
               "column": 5
             }
           },
@@ -449,20 +449,20 @@
             "type": "String",
             "desc": "Generated headers line"
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "headersToJSON",
           "description": "Parse HTTP headers input from string to array of objects containing `name` and `value`\nproperties.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 142,
+              "line": 133,
               "column": 4
             },
             "end": {
-              "line": 148,
+              "line": 138,
               "column": 5
             }
           },
@@ -478,66 +478,74 @@
             "type": "Array.<Object>",
             "desc": "The array of objects where properties are `name` as a header\nname and `value` as a header content."
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "_headersStringToJSON",
           "description": "Parse headers string to array of objects.\nSee `#toJSON` for more info.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 153,
+              "line": 145,
               "column": 4
             },
             "end": {
-              "line": 185,
+              "line": 180,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "headersString"
+              "name": "headersString",
+              "type": "String"
             }
           ],
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "return": {
+            "type": "Array.<Object>"
+          },
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "_hedersToJSON",
           "description": "Parse Headers object to array of objects.\nSee `#toJSON` for more info.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 190,
+              "line": 188,
               "column": 4
             },
             "end": {
-              "line": 213,
+              "line": 212,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "headers"
+              "name": "headers",
+              "type": "(Headers | Object)"
             }
           ],
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "return": {
+            "type": "Array.<Object>"
+          },
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "_oldCombine",
           "description": "Helper method for old system: combine headers list with encoding value.\nNote that this function will update the original array.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 223,
+              "line": 222,
               "column": 4
             },
             "end": {
-              "line": 237,
+              "line": 236,
               "column": 5
             }
           },
@@ -558,20 +566,20 @@
             "type": "Boolean",
             "desc": "True if encoding has been added to the array."
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "getContentType",
           "description": "Get the Content-Type value from the headers.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 245,
+              "line": 244,
               "column": 4
             },
             "end": {
-              "line": 266,
+              "line": 265,
               "column": 5
             }
           },
@@ -587,20 +595,20 @@
             "type": "(String | null)",
             "desc": "A content-type header value or null if not found"
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "replaceHeaderValue",
           "description": "Replace value for given header in the headers list.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 277,
+              "line": 276,
               "column": 4
             },
             "end": {
-              "line": 311,
+              "line": 310,
               "column": 5
             }
           },
@@ -626,20 +634,20 @@
             "type": "Array",
             "desc": "Updated headers."
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "getHeaderError",
           "description": "Get error message for given header string.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 317,
+              "line": 316,
               "column": 4
             },
             "end": {
-              "line": 351,
+              "line": 350,
               "column": 5
             }
           },
@@ -655,7 +663,7 @@
             "type": "?String",
             "desc": "An error message or null if the headers are valid."
           },
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "ready",
@@ -663,12 +671,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 197,
-              "column": 4
+              "line": 198,
+              "column": 2
             },
             "end": {
-              "line": 200,
-              "column": 5
+              "line": 201,
+              "column": 3
             }
           },
           "metadata": {},
@@ -683,12 +691,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 237,
-              "column": 4
+              "line": 238,
+              "column": 2
             },
             "end": {
-              "line": 263,
-              "column": 5
+              "line": 264,
+              "column": 3
             }
           },
           "metadata": {},
@@ -709,12 +717,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
-              "column": 4
+              "line": 271,
+              "column": 2
             },
             "end": {
-              "line": 302,
-              "column": 5
+              "line": 303,
+              "column": 3
             }
           },
           "metadata": {},
@@ -739,12 +747,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 309,
-              "column": 4
+              "line": 310,
+              "column": 2
             },
             "end": {
-              "line": 328,
-              "column": 5
+              "line": 329,
+              "column": 3
             }
           },
           "metadata": {},
@@ -764,12 +772,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 334,
-              "column": 4
+              "line": 335,
+              "column": 2
             },
             "end": {
-              "line": 347,
-              "column": 5
+              "line": 348,
+              "column": 3
             }
           },
           "metadata": {},
@@ -790,12 +798,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 353,
-              "column": 4
+              "line": 354,
+              "column": 2
             },
             "end": {
-              "line": 361,
-              "column": 5
+              "line": 362,
+              "column": 3
             }
           },
           "metadata": {},
@@ -816,12 +824,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 367,
-              "column": 4
+              "line": 368,
+              "column": 2
             },
             "end": {
-              "line": 376,
-              "column": 5
+              "line": 377,
+              "column": 3
             }
           },
           "metadata": {},
@@ -836,12 +844,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 382,
-              "column": 4
+              "line": 383,
+              "column": 2
             },
             "end": {
-              "line": 403,
-              "column": 5
+              "line": 404,
+              "column": 3
             }
           },
           "metadata": {},
@@ -856,12 +864,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 408,
-              "column": 4
+              "line": 409,
+              "column": 2
             },
             "end": {
-              "line": 411,
-              "column": 5
+              "line": 412,
+              "column": 3
             }
           },
           "metadata": {},
@@ -876,12 +884,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 416,
-              "column": 4
+              "line": 417,
+              "column": 2
             },
             "end": {
-              "line": 419,
-              "column": 5
+              "line": 420,
+              "column": 3
             }
           },
           "metadata": {},
@@ -896,12 +904,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 434,
-              "column": 4
+              "line": 435,
+              "column": 2
             },
             "end": {
-              "line": 473,
-              "column": 5
+              "line": 474,
+              "column": 3
             }
           },
           "metadata": {},
@@ -917,12 +925,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 479,
-              "column": 4
+              "line": 480,
+              "column": 2
             },
             "end": {
-              "line": 485,
-              "column": 5
+              "line": 486,
+              "column": 3
             }
           },
           "metadata": {},
@@ -937,12 +945,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 492,
-              "column": 4
+              "line": 493,
+              "column": 2
             },
             "end": {
-              "line": 498,
-              "column": 5
+              "line": 499,
+              "column": 3
             }
           },
           "metadata": {},
@@ -963,12 +971,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 504,
-              "column": 4
+              "line": 505,
+              "column": 2
             },
             "end": {
-              "line": 512,
-              "column": 5
+              "line": 513,
+              "column": 3
             }
           },
           "metadata": {},
@@ -995,12 +1003,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 31,
-          "column": 2
+          "line": 30,
+          "column": 0
         },
         "end": {
-          "line": 524,
-          "column": 3
+          "line": 525,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -1011,31 +1019,31 @@
           "name": "is-payload",
           "description": "Set to true when the request can carry a payload.\nIt's required for calculating headers errors.",
           "sourceRange": {
-            "file": "../headers-parser-behavior/headers-parser-behavior.html",
+            "file": "../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js",
             "start": {
-              "line": 56,
+              "line": 47,
               "column": 8
             },
             "end": {
-              "line": 56,
+              "line": 47,
               "column": 26
             }
           },
           "metadata": {},
           "type": "boolean | null | undefined",
-          "inheritedFrom": "ArcBehaviors.HeadersParserBehavior"
+          "inheritedFrom": "ArcMixins.HeadersParserMixin"
         },
         {
           "name": "xhr",
           "description": "A reference to the XMLHttpRequest instance used to generate the\nnetwork request.",
           "sourceRange": {
             "start": {
-              "line": 41,
-              "column": 8
+              "line": 42,
+              "column": 6
             },
             "end": {
-              "line": 47,
-              "column": 9
+              "line": 48,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1046,12 +1054,12 @@
           "description": "A reference to the parsed response body, if the `xhr` has completely\nresolved.",
           "sourceRange": {
             "start": {
-              "line": 56,
-              "column": 8
+              "line": 57,
+              "column": 6
             },
             "end": {
-              "line": 62,
-              "column": 9
+              "line": 63,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1062,12 +1070,12 @@
           "description": "A reference to response headers, if the `xhr` has completely\nresolved.",
           "sourceRange": {
             "start": {
-              "line": 71,
-              "column": 8
+              "line": 72,
+              "column": 6
             },
             "end": {
-              "line": 74,
-              "column": 9
+              "line": 75,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1078,12 +1086,12 @@
           "description": "A reference to the status code, if the `xhr` has completely resolved.",
           "sourceRange": {
             "start": {
-              "line": 79,
-              "column": 8
+              "line": 80,
+              "column": 6
             },
             "end": {
-              "line": 83,
-              "column": 9
+              "line": 84,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1094,12 +1102,12 @@
           "description": "A reference to the status text, if the `xhr` has completely resolved.",
           "sourceRange": {
             "start": {
-              "line": 88,
-              "column": 8
+              "line": 89,
+              "column": 6
             },
             "end": {
-              "line": 92,
-              "column": 9
+              "line": 93,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1110,12 +1118,12 @@
           "description": "A promise that resolves when the `xhr` response comes back, or rejects\nif there is an error before the `xhr` completes.\nThe resolve callback is called with the original request as an argument.\nBy default, the reject callback is called with an `Error` as an argument.\nIf `rejectWithRequest` is true, the reject callback is called with an\nobject with two keys: `request`, the original request, and `error`, the\nerror object.",
           "sourceRange": {
             "start": {
-              "line": 105,
-              "column": 8
+              "line": 106,
+              "column": 6
             },
             "end": {
-              "line": 114,
-              "column": 9
+              "line": 115,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1126,12 +1134,12 @@
           "description": "An object that contains progress information emitted by the XHR if\navailable.",
           "sourceRange": {
             "start": {
-              "line": 122,
-              "column": 8
+              "line": 123,
+              "column": 6
             },
             "end": {
-              "line": 128,
-              "column": 9
+              "line": 129,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1142,12 +1150,12 @@
           "description": "Aborted will be true if an abort of the request is attempted.",
           "sourceRange": {
             "start": {
-              "line": 133,
-              "column": 8
+              "line": 134,
+              "column": 6
             },
             "end": {
-              "line": 137,
-              "column": 9
+              "line": 138,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1158,12 +1166,12 @@
           "description": "Errored will be true if the browser fired an error event from the\nXHR object (mainly network errors).",
           "sourceRange": {
             "start": {
-              "line": 143,
-              "column": 8
+              "line": 144,
+              "column": 6
             },
             "end": {
-              "line": 147,
-              "column": 9
+              "line": 148,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1174,12 +1182,12 @@
           "description": "TimedOut will be true if the XHR threw a timeout event.",
           "sourceRange": {
             "start": {
-              "line": 152,
-              "column": 8
+              "line": 153,
+              "column": 6
             },
             "end": {
-              "line": 156,
-              "column": 9
+              "line": 157,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1190,12 +1198,12 @@
           "description": "Appends headers to each request handled by this component.\n\nExample\n\n```html\n<xhr-simple-request\n append-headers=\"x-token: 123\\nx-api-demo: true\"></xhr-simple-request>\n```",
           "sourceRange": {
             "start": {
-              "line": 167,
-              "column": 8
+              "line": 168,
+              "column": 6
             },
             "end": {
-              "line": 167,
-              "column": 29
+              "line": 168,
+              "column": 27
             }
           },
           "metadata": {},
@@ -1206,12 +1214,12 @@
           "description": "If set every request made from the console will be proxied by the service provided in this\nvalue.\nIt will prefix entered URL with the proxy value. so the call to\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/path/http://domain.com/path/?query=some+value`\n\nIf the proxy require a to pass the URL as a query parameter define value as follows:\n`https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`\nattribute.",
           "sourceRange": {
             "start": {
-              "line": 187,
-              "column": 8
+              "line": 188,
+              "column": 6
             },
             "end": {
-              "line": 187,
-              "column": 21
+              "line": 188,
+              "column": 19
             }
           },
           "metadata": {},
@@ -1222,12 +1230,12 @@
           "description": "If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`",
           "sourceRange": {
             "start": {
-              "line": 193,
-              "column": 8
+              "line": 194,
+              "column": 6
             },
             "end": {
-              "line": 193,
-              "column": 31
+              "line": 194,
+              "column": 29
             }
           },
           "metadata": {},
@@ -1249,13 +1257,13 @@
       "slots": [],
       "tagname": "xhr-simple-request-transport",
       "mixins": [
-        "ArcBehaviors.HeadersParserBehavior"
+        "HeadersParserMixin"
       ]
     },
     {
       "description": "`xhr-simple-request`\nA XHR request that works with API components.\n\nIt handles `api-request` and `abort-api-request` custom events that control\nrequest flow in API components ecosystem.\n\nThis makes a request by using `XMLHttpRequest` object.\n\n## ARC request data model\n\nThe `api-request` custom event has to contain ARC (Advanced REST client)\nrequest data model. It expects the following properties:\n- url (`String`) - Request URL\n- method (`String`) - Request HTTP method.\n- headers (`String|undefined`) - HTTP headers string\n- payload (`String|FormData|File|ArrayBuffer|undefined`) Request body\n- id (`String`) **required**, request id. It can be any string, it must be unique.\n\nNote, this library does not validates the values and use them as is.\nAny error related to validation has to be handled by the application.\n\n## api-response data model\n\nWhen response is ready the element dispatches `api-response` custom event\nwith following properties in the detail object.\n- id (`String`) - Request incomming ID\n- request (`Object`) - Original request object from `api-request` event\n- loadingTime (`Number`) - High precise timing used by the performance API\n- isError (`Boolean`) - Indicates if the request is errored\n- error (`Error|undefined`) - Error object\n- response (`Object`) - The response data:\n - status (`Number`) - Response status code\n - statusText (`String`) - Response status text. Can be empty string.\n - payload (`String|Document|ArrayBuffer|Blob`) - Response body\n - headers (`String|undefined`) - Response headers\n\nPlease note that aborting the request always sends `api-response` event\nwith `isError` set to true.",
       "summary": "",
-      "path": "xhr-simple-request.html",
+      "path": "xhr-simple-request.js",
       "properties": [
         {
           "name": "eventsTarget",
@@ -1263,13 +1271,13 @@
           "description": "Events handlers target. By default the element listens on\n`window` object. If set, all events listeners will be attached to this\nobject instead of `window`.",
           "privacy": "public",
           "sourceRange": {
-            "file": "../events-target-behavior/events-target-behavior.html",
+            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
             "start": {
-              "line": 73,
+              "line": 64,
               "column": 8
             },
             "end": {
-              "line": 76,
+              "line": 67,
               "column": 9
             }
           },
@@ -1279,7 +1287,7 @@
               "attributeType": "Object"
             }
           },
-          "inheritedFrom": "ArcBehaviors.EventsTargetBehavior"
+          "inheritedFrom": "EventsTargetMixin"
         },
         {
           "name": "_oldEventsTarget",
@@ -1287,13 +1295,13 @@
           "description": "An event target used to attach listeners.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../events-target-behavior/events-target-behavior.html",
+            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
             "start": {
-              "line": 78,
+              "line": 69,
               "column": 8
             },
             "end": {
-              "line": 78,
+              "line": 69,
               "column": 32
             }
           },
@@ -1302,7 +1310,7 @@
               "attributeType": "Object"
             }
           },
-          "inheritedFrom": "ArcBehaviors.EventsTargetBehavior"
+          "inheritedFrom": "EventsTargetMixin"
         },
         {
           "name": "activeRequests",
@@ -1311,12 +1319,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 74,
-              "column": 8
+              "line": 75,
+              "column": 6
             },
             "end": {
-              "line": 79,
-              "column": 9
+              "line": 80,
+              "column": 7
             }
           },
           "metadata": {
@@ -1332,12 +1340,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 83,
-              "column": 8
+              "line": 84,
+              "column": 6
             },
             "end": {
-              "line": 87,
-              "column": 9
+              "line": 88,
+              "column": 7
             }
           },
           "metadata": {
@@ -1355,12 +1363,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 93,
-              "column": 8
+              "line": 94,
+              "column": 6
             },
             "end": {
-              "line": 97,
-              "column": 9
+              "line": 98,
+              "column": 7
             }
           },
           "metadata": {
@@ -1378,12 +1386,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 108,
-              "column": 8
+              "line": 109,
+              "column": 6
             },
             "end": {
-              "line": 108,
-              "column": 29
+              "line": 109,
+              "column": 27
             }
           },
           "metadata": {
@@ -1399,12 +1407,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 120,
-              "column": 8
+              "line": 121,
+              "column": 6
             },
             "end": {
-              "line": 120,
-              "column": 21
+              "line": 121,
+              "column": 19
             }
           },
           "metadata": {
@@ -1420,12 +1428,12 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 126,
-              "column": 8
+              "line": 127,
+              "column": 6
             },
             "end": {
-              "line": 126,
-              "column": 31
+              "line": 127,
+              "column": 29
             }
           },
           "metadata": {
@@ -1441,13 +1449,13 @@
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../events-target-behavior/events-target-behavior.html",
+            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
             "start": {
-              "line": 81,
+              "line": 72,
               "column": 4
             },
             "end": {
-              "line": 84,
+              "line": 75,
               "column": 6
             }
           },
@@ -1456,20 +1464,20 @@
           "return": {
             "type": "void"
           },
-          "inheritedFrom": "ArcBehaviors.EventsTargetBehavior"
+          "inheritedFrom": "EventsTargetMixin"
         },
         {
           "name": "disconnectedCallback",
           "description": "",
           "privacy": "public",
           "sourceRange": {
-            "file": "../events-target-behavior/events-target-behavior.html",
+            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
             "start": {
-              "line": 86,
+              "line": 77,
               "column": 5
             },
             "end": {
-              "line": 91,
+              "line": 82,
               "column": 6
             }
           },
@@ -1478,20 +1486,20 @@
           "return": {
             "type": "void"
           },
-          "inheritedFrom": "ArcBehaviors.EventsTargetBehavior"
+          "inheritedFrom": "EventsTargetMixin"
         },
         {
           "name": "_eventsTargetChanged",
           "description": "Removes old handlers (if any) and attaches listeners on new event\nevent target.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "../events-target-behavior/events-target-behavior.html",
+            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
             "start": {
-              "line": 99,
+              "line": 90,
               "column": 4
             },
             "end": {
-              "line": 105,
+              "line": 96,
               "column": 5
             }
           },
@@ -1506,7 +1514,7 @@
           "return": {
             "type": "void"
           },
-          "inheritedFrom": "ArcBehaviors.EventsTargetBehavior"
+          "inheritedFrom": "EventsTargetMixin"
         },
         {
           "name": "_attachListeners",
@@ -1514,12 +1522,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 141,
-              "column": 4
+              "line": 142,
+              "column": 2
             },
             "end": {
-              "line": 144,
-              "column": 5
+              "line": 145,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1538,12 +1546,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 146,
-              "column": 4
+              "line": 147,
+              "column": 2
             },
             "end": {
-              "line": 149,
-              "column": 5
+              "line": 150,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1562,12 +1570,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 136,
-              "column": 4
+              "line": 137,
+              "column": 2
             },
             "end": {
-              "line": 139,
-              "column": 5
+              "line": 140,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1582,12 +1590,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 154,
-              "column": 4
+              "line": 155,
+              "column": 2
             },
             "end": {
-              "line": 160,
-              "column": 5
+              "line": 161,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1602,12 +1610,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 167,
-              "column": 4
+              "line": 168,
+              "column": 2
             },
             "end": {
-              "line": 186,
-              "column": 5
+              "line": 187,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1627,12 +1635,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 193,
-              "column": 4
+              "line": 194,
+              "column": 2
             },
             "end": {
-              "line": 205,
-              "column": 5
+              "line": 206,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1652,12 +1660,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 213,
-              "column": 4
+              "line": 214,
+              "column": 2
             },
             "end": {
-              "line": 227,
-              "column": 5
+              "line": 228,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1684,12 +1692,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 233,
-              "column": 4
+              "line": 234,
+              "column": 2
             },
             "end": {
-              "line": 239,
-              "column": 5
+              "line": 240,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1710,12 +1718,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 246,
-              "column": 4
+              "line": 247,
+              "column": 2
             },
             "end": {
-              "line": 258,
-              "column": 5
+              "line": 259,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1741,12 +1749,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 264,
-              "column": 4
+              "line": 265,
+              "column": 2
             },
             "end": {
-              "line": 271,
-              "column": 5
+              "line": 272,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1767,12 +1775,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 277,
-              "column": 4
+              "line": 278,
+              "column": 2
             },
             "end": {
-              "line": 279,
-              "column": 5
+              "line": 280,
+              "column": 3
             }
           },
           "metadata": {},
@@ -1798,12 +1806,12 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 63,
-          "column": 2
+          "line": 62,
+          "column": 0
         },
         "end": {
-          "line": 287,
-          "column": 3
+          "line": 288,
+          "column": 1
         }
       },
       "privacy": "public",
@@ -1814,31 +1822,31 @@
           "name": "events-target",
           "description": "Events handlers target. By default the element listens on\n`window` object. If set, all events listeners will be attached to this\nobject instead of `window`.",
           "sourceRange": {
-            "file": "../events-target-behavior/events-target-behavior.html",
+            "file": "../@advanced-rest-client/events-target-mixin/events-target-mixin.js",
             "start": {
-              "line": 73,
+              "line": 64,
               "column": 8
             },
             "end": {
-              "line": 76,
+              "line": 67,
               "column": 9
             }
           },
           "metadata": {},
           "type": "Object | null | undefined",
-          "inheritedFrom": "ArcBehaviors.EventsTargetBehavior"
+          "inheritedFrom": "EventsTargetMixin"
         },
         {
           "name": "active-requests",
           "description": "Map of active request objects.\nKeys in the map is request ID and vaue is instance of\n`XhrSimpleRequestTransport`",
           "sourceRange": {
             "start": {
-              "line": 74,
-              "column": 8
+              "line": 75,
+              "column": 6
             },
             "end": {
-              "line": 79,
-              "column": 9
+              "line": 80,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1849,12 +1857,12 @@
           "description": "True while loading latest started requests.",
           "sourceRange": {
             "start": {
-              "line": 83,
-              "column": 8
+              "line": 84,
+              "column": 6
             },
             "end": {
-              "line": 87,
-              "column": 9
+              "line": 88,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1865,12 +1873,12 @@
           "description": "Latest used request object.",
           "sourceRange": {
             "start": {
-              "line": 93,
-              "column": 8
+              "line": 94,
+              "column": 6
             },
             "end": {
-              "line": 97,
-              "column": 9
+              "line": 98,
+              "column": 7
             }
           },
           "metadata": {},
@@ -1881,12 +1889,12 @@
           "description": "Appends headers to each request handled by this component.\n\nExample\n\n```html\n<xhr-simple-request\n append-headers=\"x-token: 123\\nx-api-demo: true\"></xhr-simple-request>\n```",
           "sourceRange": {
             "start": {
-              "line": 108,
-              "column": 8
+              "line": 109,
+              "column": 6
             },
             "end": {
-              "line": 108,
-              "column": 29
+              "line": 109,
+              "column": 27
             }
           },
           "metadata": {},
@@ -1897,12 +1905,12 @@
           "description": "If set every request made from the console will be proxied by the service provided in this\nvalue.\nIt will prefix entered URL with the proxy value. so the call to\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/path/http://domain.com/path/?query=some+value`\n\nIf the proxy require a to pass the URL as a query parameter define value as follows:\n`https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`\nattribute.",
           "sourceRange": {
             "start": {
-              "line": 120,
-              "column": 8
+              "line": 121,
+              "column": 6
             },
             "end": {
-              "line": 120,
-              "column": 21
+              "line": 121,
+              "column": 19
             }
           },
           "metadata": {},
@@ -1913,12 +1921,12 @@
           "description": "If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.\n`http://domain.com/path/?query=some+value` will become\n`https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`",
           "sourceRange": {
             "start": {
-              "line": 126,
-              "column": 8
+              "line": 127,
+              "column": 6
             },
             "end": {
-              "line": 126,
-              "column": 31
+              "line": 127,
+              "column": 29
             }
           },
           "metadata": {},
@@ -1952,7 +1960,7 @@
       "slots": [],
       "tagname": "xhr-simple-request",
       "mixins": [
-        "ArcBehaviors.EventsTargetBehavior"
+        "EventsTargetMixin"
       ]
     }
   ]

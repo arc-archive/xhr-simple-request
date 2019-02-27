@@ -5,11 +5,16 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   xhr-simple-request-transport.html
+ *   xhr-simple-request-transport.js
  */
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../headers-parser-behavior/headers-parser-behavior.d.ts" />
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+
+import {HeadersParserMixin} from '@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js';
 
 declare namespace TransportElements {
 
@@ -23,7 +28,7 @@ declare namespace TransportElements {
    * It also handles custom events related to request flow.
    */
   class XhrSimpleRequestTransport extends
-    ArcBehaviors.HeadersParserBehavior(
+    HeadersParserMixin(
     Object) {
 
     /**
@@ -237,6 +242,9 @@ declare namespace TransportElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "xhr-simple-request-transport": TransportElements.XhrSimpleRequestTransport;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "xhr-simple-request-transport": TransportElements.XhrSimpleRequestTransport;
+  }
 }

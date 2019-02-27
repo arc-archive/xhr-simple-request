@@ -1,12 +1,32 @@
 {
-  "name": "@api-components/xhr-simple-request",
-  "version": "2.0.3",
-  "license": "Apache-2.0",
   "description": "An XHR request that works with API components",
-  "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.5.1"
+  "keywords": [
+    "xhr",
+    "request",
+    "api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/xhr-simple-request.git"
   },
-  "private": false,
+  "name": "@advanced-rest-client/xhr-simple-request",
+  "version": "3.0.0-preview.1",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@polymer/gen-typescript-declarations": "^1.5.1",
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/paper-input": "^3.0.0",
+    "@polymer/iron-form": "^3.0.0",
+    "@polymer/paper-button": "^3.0.0",
+    "@polymer/paper-toast": "^3.0.0",
+    "@polymer/iron-component-page": "^4.0.0",
+    "@polymer/test-fixture": "^4.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3",
+    "wct-mocha": "^1.0.0"
+  },
   "authors": [
     "pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
@@ -17,12 +37,18 @@
     "test": "polymer test --plugin local",
     "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/advanced-rest-client/xhr-simple-request.git"
-  },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/xhr-simple-request/issues",
     "email": "arc@mulesoft.com"
+  },
+  "main": "xhr-simple-request.js",
+  "contributors": [
+    "pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "dependencies": {
+    "@advanced-rest-client/events-target-mixin": "^3.0.0-preview.1",
+    "@advanced-rest-client/headers-parser-mixin": "^3.0.0-preview.2",
+    "@polymer/polymer": "^3.0.0"
   }
 }

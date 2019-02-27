@@ -5,12 +5,16 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   xhr-simple-request.html
+ *   xhr-simple-request.js
  */
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../events-target-behavior/events-target-behavior.d.ts" />
-/// <reference path="xhr-simple-request-transport.d.ts" />
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+
+import {EventsTargetMixin} from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
 
 declare namespace TransportElements {
 
@@ -55,7 +59,7 @@ declare namespace TransportElements {
    * with `isError` set to true.
    */
   class XhrSimpleRequest extends
-    ArcBehaviors.EventsTargetBehavior(
+    EventsTargetMixin(
     Object) {
 
     /**
@@ -167,6 +171,9 @@ declare namespace TransportElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "xhr-simple-request": TransportElements.XhrSimpleRequest;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "xhr-simple-request": TransportElements.XhrSimpleRequest;
+  }
 }
