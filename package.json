@@ -10,7 +10,7 @@
     "url": "git://github.com/advanced-rest-client/xhr-simple-request.git"
   },
   "name": "@advanced-rest-client/xhr-simple-request",
-  "version": "3.0.0-preview.1",
+  "version": "3.0.0-preview.2",
   "license": "Apache-2.0",
   "devDependencies": {
     "@polymer/gen-typescript-declarations": "^1.5.1",
