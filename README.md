@@ -58,6 +58,25 @@ npm install --save @advanced-rest-client/xhr-simple-request
 </html>
 ```
 
+### In a LitElement template
+
+```js
+import { LitElement, html } from 'lit-element';
+import '@advanced-rest-client/xhr-simple-request/xhr-simple-request.js';
+
+class SampleElement extends LitElement {
+  render() {
+    return html`
+    <xhr-simple-request @api-response="${this._onResponse}"></xhr-simple-request>`;
+  }
+
+  _onResponse(e) {
+    console.log(e.detail);
+  }
+}
+customElements.define('sample-element', SampleElement);
+```
+
 ### In a Polymer 3 element
 
 ```js
@@ -93,23 +112,22 @@ class SampleElement extends PolymerElement {
 customElements.define('sample-element', SampleElement);
 ```
 
-### Installation
+### Development
 
 ```sh
 git clone https://github.com/advanced-rest-client/xhr-simple-request
-cd api-url-editor
+cd xhr-simple-request
 npm install
-npm install -g polymer-cli
 ```
 
 ### Running the demo locally
 
 ```sh
-polymer serve --npm
-open http://127.0.0.1:<port>/demo/
+npm start
 ```
 
 ### Running the tests
+
 ```sh
-polymer test --npm
+npm test
 ```

@@ -11,8 +11,9 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {HeadersParserMixin} from '../../@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js';
+import { LitElement } from 'lit-element';
+import { HeadersParserMixin } from '@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js';
+function noop() {}
 /**
  * `xhr-simple-request`
  * A XHR request that works with API components.
@@ -28,10 +29,7 @@ import {HeadersParserMixin} from '../../@advanced-rest-client/headers-parser-mix
  * @appliesMixin HeadersParserMixin
  * @memberof TransportElements
  */
-class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
-  static get is() {
-    return 'xhr-simple-request-transport';
-  }
+class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
   static get properties() {
     return {
       /**
@@ -40,13 +38,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
        *
        * @type {XMLHttpRequest}
        */
-      xhr: {
-        type: Object,
-        readOnly: true,
-        value: function() {
-          return new XMLHttpRequest();
-        }
-      },
+      _xhr: { type: Object },
 
       /**
        * A reference to the parsed response body, if the `xhr` has completely
@@ -55,13 +47,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
        * @type {*}
        * @default null
        */
-      response: {
-        type: Object,
-        readOnly: true,
-        value: function() {
-          return null;
-        }
-      },
+      _response: { type: Object },
 
       /**
        * A reference to response headers, if the `xhr` has completely
@@ -70,29 +56,17 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
        * @type {String}
        * @default undefined
        */
-      headers: {
-        type: Object,
-        readOnly: true
-      },
+      _headers: { type: Object },
 
       /**
        * A reference to the status code, if the `xhr` has completely resolved.
        */
-      status: {
-        type: Number,
-        readOnly: true,
-        value: 0
-      },
+      _status: { type: Number },
 
       /**
        * A reference to the status text, if the `xhr` has completely resolved.
        */
-      statusText: {
-        type: String,
-        readOnly: true,
-        value: ''
-      },
-
+      _statusText: { type: String },
       /**
        * A promise that resolves when the `xhr` response comes back, or rejects
        * if there is an error before the `xhr` completes.
@@ -104,16 +78,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
        *
        * @type {Promise}
        */
-      completes: {
-        type: Object,
-        readOnly: true,
-        value: function() {
-          return new Promise((resolve, reject) => {
-            this.resolveCompletes = resolve;
-            this.rejectCompletes = reject;
-          });
-        }
-      },
+      _completes: { type: Object },
 
       /**
        * An object that contains progress information emitted by the XHR if
@@ -121,41 +86,23 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
        *
        * @default {}
        */
-      progress: {
-        type: Object,
-        readOnly: true,
-        value: function() {
-          return {};
-        }
-      },
+      _progress: { type: Object },
 
       /**
        * Aborted will be true if an abort of the request is attempted.
        */
-      aborted: {
-        type: Boolean,
-        readOnly: true,
-        value: false,
-      },
+      _aborted: { type: Boolean },
 
       /**
        * Errored will be true if the browser fired an error event from the
        * XHR object (mainly network errors).
        */
-      errored: {
-        type: Boolean,
-        readOnly: true,
-        value: false
-      },
+      _errored: { type: Boolean },
 
       /**
        * TimedOut will be true if the XHR threw a timeout event.
        */
-      timedOut: {
-        type: Boolean,
-        readOnly: true,
-        value: false
-      },
+      _timedOut: { type: Boolean },
       /**
        * Appends headers to each request handled by this component.
        *
@@ -166,15 +113,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
        *  append-headers="x-token: 123\nx-api-demo: true"></xhr-simple-request>
        * ```
        */
-      appendHeaders: String,
-      /**
-       * Computed list of headers to add to each request.
-       * @type {Array<Object>}
-       */
-      _addHeaders: {
-        type: Array,
-        computed: '_computeAddHeaders(appendHeaders)'
-      },
+      appendHeaders: { type: String },
       /**
        * If set every request made from the console will be proxied by the service provided in this
        * value.
@@ -186,21 +125,117 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
        * `https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`
        * attribute.
        */
-      proxy: String,
+      proxy: { type: String },
       /**
        * If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.
        * `http://domain.com/path/?query=some+value` will become
        * `https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`
        */
-      proxyEncodeUrl: Boolean
+      proxyEncodeUrl: { type: Boolean }
     };
   }
-
-  ready() {
-    super.ready();
-    this.setAttribute('hidden', 'true');
+  /**
+   * A reference to the parsed response body, if the `xhr` has completely
+   * resolved.
+   *
+   * @return {*}
+   * @default null
+   */
+  get response() {
+    return this._response;
+  }
+  /**
+   * A reference to response headers, if the `xhr` has completely
+   * resolved.
+   *
+   * @return {String}
+   * @default undefined
+   */
+  get headers() {
+    return this._headers;
+  }
+  /**
+   * A reference to the status code, if the `xhr` has completely resolved.
+   *
+   * @return {Number}
+   * @default 0
+   */
+  get status() {
+    return this._status;
   }
 
+  get statusText() {
+    return this._statusText;
+  }
+  /**
+   * A promise that resolves when the `xhr` response comes back, or rejects
+   * if there is an error before the `xhr` completes.
+   * The resolve callback is called with the original request as an argument.
+   * By default, the reject callback is called with an `Error` as an argument.
+   * If `rejectWithRequest` is true, the reject callback is called with an
+   * object with two keys: `request`, the original request, and `error`, the
+   * error object.
+   *
+   * @return {Promise}
+   */
+  get completes() {
+    return this._completes;
+  }
+  /**
+   * An object that contains progress information emitted by the XHR if
+   * available.
+   *
+   * @default {}
+   * @return {Object}
+   */
+  get progress() {
+    return this._progress;
+  }
+  /**
+   * Aborted will be true if an abort of the request is attempted.
+   *
+   * @default false
+   * @return {Boolean}
+   */
+  get aborted() {
+    return this._aborted;
+  }
+  /**
+   * Errored will be true if the browser fired an error event from the
+   * XHR object (mainly network errors).
+   */
+  get errored() {
+    return this._errored;
+  }
+  /**
+   * Aborted will be true if an abort of the request is attempted.
+   */
+  get timedOut() {
+    return this._timedOut;
+  }
+
+  constructor() {
+    super();
+    this._xhr = new XMLHttpRequest();
+    this._response = null;
+    this._status = 0;
+    this._statusText = '';
+    this._completes = new Promise((resolve, reject) => {
+      this.resolveCompletes = resolve;
+      this.rejectCompletes = reject;
+    });
+    this._progress = {};
+    this._aborted = false;
+    this._errored = false;
+    this._timedOut = false;
+  }
+
+  connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+    this.setAttribute('aria-hidden', 'true');
+  }
   /**
    * Succeeded is true if the request succeeded. The request succeeded if it
    * loaded without error, wasn't aborted, and the status code is ≥ 200, and
@@ -215,12 +250,11 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
     if (this.errored || this.aborted || this.timedOut) {
       return false;
     }
-    const status = this.xhr.status || 0;
+    const status = this._xhr.status || 0;
 
     // Note: if we are using the file:// protocol, the status code will be 0
     // for all outcomes (successful or otherwise).
-    return status === 0 ||
-      (status >= 200 && status < 300);
+    return status === 0 || (status >= 200 && status < 300);
   }
   /**
    * Sends a request.
@@ -237,7 +271,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
    * @return {Promise}
    */
   send(options) {
-    const xhr = this.xhr;
+    const xhr = this._xhr;
     if (xhr.readyState > 0) {
       return null;
     }
@@ -248,11 +282,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
     // Called after all of the above.
     xhr.addEventListener('loadend', () => this._loadEndHandler());
     const url = this._appendProxy(options.url);
-    xhr.open(
-      options.method || 'GET',
-      url,
-      true
-    );
+    xhr.open(options.method || 'GET', url, true);
     this._applyHeaders(xhr, options.headers);
     xhr.timeout = options.timeout;
     xhr.withCredentials = !!options.withCredentials;
@@ -270,18 +300,15 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
    * @param {?String} headers HTTP headers string
    */
   _applyHeaders(xhr, headers) {
-    const fixed = this._addHeaders;
+    const fixed = this._computeAddHeaders(this.appendHeaders);
     const fixedNames = [];
     if (fixed && fixed.length) {
       fixed.forEach((item) => {
         fixedNames[fixedNames.length] = item.name;
         try {
-          xhr.setRequestHeader(
-            item.name,
-            item.value
-          );
+          xhr.setRequestHeader(item.name, item.value);
         } catch (e) {
-          console.warn(`Header ${item.name} cannot be set with value ${item.value}`);
+          noop();
         }
       });
     }
@@ -292,12 +319,9 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
           return;
         }
         try {
-          xhr.setRequestHeader(
-            item.name,
-            item.value
-          );
+          xhr.setRequestHeader(item.name, item.value);
         } catch (e) {
-          console.warn(`Header ${item.name} cannot be set with value ${item.value}`);
+          noop();
         }
       });
     }
@@ -312,11 +336,11 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
     if (this.aborted) {
       return;
     }
-    this._setProgress({
+    this._progress = {
       lengthComputable: progress.lengthComputable,
       loaded: progress.loaded,
       total: progress.total
-    });
+    };
     // Webcomponents v1 spec does not fire *-changed events when not connected
     const e = new CustomEvent('api-request-progress-changed', {
       cancelable: false,
@@ -337,12 +361,12 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
     if (this.aborted) {
       return;
     }
-    this._setErrored(true);
+    this._errored = true;
     this._updateStatus();
-    this._setHeaders(this.collectHeaders());
+    this._headers = this.collectHeaders();
     const response = {
-      error: error,
-      request: this.xhr,
+      error,
+      request: this._xhr,
       headers: this.headers
     };
     this.rejectCompletes(response);
@@ -353,11 +377,11 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
    * @param {ProgressEvent} error https://xhr.spec.whatwg.org/#event-xhr-timeout
    */
   _timeoutHandler(error) {
-    this._setTimedOut(true);
+    this._timedOut = true;
     this._updateStatus();
     const response = {
-      error: error,
-      request: this.xhr
+      error,
+      request: this._xhr
     };
     this.rejectCompletes(response);
   }
@@ -367,12 +391,12 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
    * @param {ProgressEvent} error https://xhr.spec.whatwg.org/#event-xhr-abort
    */
   _abortHandler() {
-    this._setAborted(true);
+    this._aborted = true;
     this._updateStatus();
     const error = new Error('Request aborted');
     const response = {
-      error: error,
-      request: this.xhr
+      error,
+      request: this._xhr
     };
     this.rejectCompletes(response);
   }
@@ -386,13 +410,13 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
       return;
     }
     this._updateStatus();
-    this._setHeaders(this.collectHeaders());
-    this._setResponse(this.parseResponse());
+    this._headers = this.collectHeaders();
+    this._response = this.parseResponse();
     if (!this.succeeded) {
-      const error = new Error('The request failed with status code: ' + this.xhr.status);
+      const error = new Error('The request failed with status code: ' + this._xhr.status);
       const response = {
         error: error,
-        request: this.xhr,
+        request: this._xhr,
         headers: this.headers
       };
       this.rejectCompletes(response);
@@ -403,21 +427,20 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
       });
     }
   }
-
   /**
    * Aborts the request.
    */
   abort() {
-    this._setAborted(true);
-    this.xhr.abort();
+    this._aborted = true;
+    this._xhr.abort();
   }
 
   /**
    * Updates the status code and status text.
    */
   _updateStatus() {
-    this._setStatus(this.xhr.status);
-    this._setStatusText((this.xhr.statusText === undefined) ? '' : this.xhr.statusText);
+    this._status = this._xhr.status;
+    this._statusText = (this._xhr.statusText === undefined ? '' : this._xhr.statusText);
   }
   /**
    * Attempts to parse the response body of the XHR. If parsing succeeds,
@@ -434,9 +457,9 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
    * or undefined if there was an empty response or parsing failed.
    */
   parseResponse() {
-    const xhr = this.xhr;
+    const xhr = this._xhr;
     const responseType = xhr.responseType || xhr._responseType;
-    const preferResponseText = !this.xhr.responseType;
+    const preferResponseText = !xhr.responseType;
     try {
       switch (responseType) {
         case 'json':
@@ -452,7 +475,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
             try {
               return JSON.parse(xhr.responseText);
             } catch (_) {
-              console.warn('Failed to parse JSON sent from ' + xhr.responseURL);
+              noop();
               return null;
             }
           }
@@ -481,8 +504,10 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
   collectHeaders() {
     let data;
     try {
-      data = this.xhr.getAllResponseHeaders();
-    } catch (_) {}
+      data = this._xhr.getAllResponseHeaders();
+    } catch (_) {
+      noop();
+    }
     return data;
   }
   /**
@@ -525,4 +550,4 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(PolymerElement) {
    */
 }
 
-window.customElements.define(XhrSimpleRequestTransport.is, XhrSimpleRequestTransport);
+window.customElements.define('xhr-simple-request-transport', XhrSimpleRequestTransport);

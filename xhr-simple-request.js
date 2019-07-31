@@ -11,8 +11,8 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 */
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {EventsTargetMixin} from '../../@advanced-rest-client/events-target-mixin/events-target-mixin.js';
+import { LitElement } from 'lit-element';
+import { EventsTargetMixin } from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
 import './xhr-simple-request-transport.js';
 /**
  * `xhr-simple-request`
@@ -60,10 +60,7 @@ import './xhr-simple-request-transport.js';
  * @appliesMixin EventsTargetMixin
  * @memberof TransportElements
  */
-class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
-  static get is() {
-    return 'xhr-simple-request';
-  }
+class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
   static get properties() {
     return {
       /**
@@ -73,30 +70,17 @@ class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
        *
        * @type {Map<String, XhrSimpleRequestTransport>}
        */
-      activeRequests: {
-        type: Object,
-        value: function() {
-          return new Map();
-        }
-      },
+      activeRequests: { type: Object },
       /**
        * True while loading latest started requests.
        */
-      loading: {
-        type: Boolean,
-        notify: true,
-        readOnly: true
-      },
+      _loading: { type: Boolean },
       /**
        * Latest used request object.
        *
        * @type {XhrSimpleRequestTransport}
        */
-      lastRequest: {
-        type: Object,
-        notify: true,
-        readOnly: true
-      },
+      _lastRequest: { type: Object },
       /**
        * Appends headers to each request handled by this component.
        *
@@ -107,7 +91,7 @@ class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
        *  append-headers="x-token: 123\nx-api-demo: true"></xhr-simple-request>
        * ```
        */
-      appendHeaders: String,
+      appendHeaders: { type: String },
       /**
        * If set every request made from the console will be proxied by the service provided in this
        * value.
@@ -119,25 +103,76 @@ class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
        * `https://proxy.com/path/?url=`. In this case be sure to set `proxy-encode-url`
        * attribute.
        */
-      proxy: String,
+      proxy: { type: String },
       /**
        * If `proxy` is set, it will URL encode the request URL before appending it to the proxy URL.
        * `http://domain.com/path/?query=some+value` will become
        * `https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`
        */
-      proxyEncodeUrl: Boolean
+      proxyEncodeUrl: { type: Boolean }
     };
+  }
+
+  /**
+   * True while loading latest started requests.
+   *
+   * @return {Boolean}
+   */
+  get loading() {
+    return this._loading;
+  }
+
+  get _loading() {
+    return this.__loading;
+  }
+
+  set _loading(value) {
+    const old = this._loading;
+    if (old === value) {
+      return;
+    }
+    this._loading = old;
+    this.dispatchEvent(new CustomEvent('loading-changed', {
+      detail: {
+        value
+      }
+    }));
+  }
+
+  get lastRequest() {
+    return this._lastRequest;
+  }
+
+  get _lastRequest() {
+    return this.__lastRequest;
+  }
+
+  set _lastRequest(value) {
+    const old = this.__lastRequest;
+    if (old === value) {
+      return;
+    }
+    this.__lastRequest = old;
+    this.dispatchEvent(new CustomEvent('lastrequest-changed', {
+      detail: {
+        value
+      }
+    }));
   }
 
   constructor() {
     super();
     this._requestHandler = this._requestHandler.bind(this);
     this._aborthHandler = this._aborthHandler.bind(this);
+
+    this.activeRequests = new Map();
   }
 
-  ready() {
-    super.ready();
-    this.setAttribute('hidden', 'true');
+  connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+    this.setAttribute('aria-hidden', 'true');
   }
 
   _attachListeners(node) {
@@ -183,8 +218,8 @@ class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
     request._startTime = performance.now();
     request.send(opts);
 
-    this._setLastRequest(request);
-    this._setLoading(true);
+    this._lastRequest = request;
+    this._loading = true;
   }
   /**
    * Handler for `abort-api-request` event. Aborts the request and reports
@@ -233,7 +268,7 @@ class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
    * @param {String} id Request ID
    */
   _responseHandler(id) {
-    this._setLoading(false);
+    this._loading = false;
     const request = this.activeRequests.get(id);
     const result = this._createDetail(request, id);
     result.isError = false;
@@ -246,7 +281,7 @@ class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
    * @param {String} id Request ID
    */
   _erroreHandler(err, id) {
-    this._setLoading(false);
+    this._loading = false;
     /* global ProgressEvent */
     let error = err.error;
     if (error instanceof ProgressEvent) {
@@ -288,4 +323,4 @@ class XhrSimpleRequest extends EventsTargetMixin(PolymerElement) {
    */
 }
 
-window.customElements.define(XhrSimpleRequest.is, XhrSimpleRequest);
+window.customElements.define('xhr-simple-request', XhrSimpleRequest);

@@ -1,9 +1,9 @@
-/* global sinon */
+import sinon from 'sinon/pkg/sinon-esm.js';
 
 /**
  * Mocking server for tests
  */
-class MockServer {
+export class MockServer {
   /**
    * Creates server endpoints
    */
@@ -84,11 +84,10 @@ class MockServer {
     const url = 'http://success.domain.com/headers';
     this.srv.respondWith('GET', url, (xhr) => {
       xhr.respond(200, {
-        'Content-Type': 'text/plain'
+        'Content-Type': 'appliction/json'
       }, JSON.stringify(xhr.requestHeaders));
     });
   }
-
   /**
    * Mocks 404 error response
    */
@@ -101,4 +100,3 @@ class MockServer {
     });
   }
 }
-window.mockServer = new MockServer();

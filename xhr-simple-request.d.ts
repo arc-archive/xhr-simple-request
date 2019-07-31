@@ -12,7 +12,7 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {LitElement} from 'lit-element';
 
 import {EventsTargetMixin} from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
 
@@ -63,21 +63,27 @@ declare namespace TransportElements {
     Object) {
 
     /**
+     * True while loading latest started requests.
+     */
+    readonly loading: Boolean|null;
+
+    /**
+     * True while loading latest started requests.
+     */
+    _loading: boolean|null|undefined;
+    readonly lastRequest: any;
+
+    /**
+     * Latest used request object.
+     */
+    _lastRequest: XhrSimpleRequestTransport|null;
+
+    /**
      * Map of active request objects.
      * Keys in the map is request ID and vaue is instance of
      * `XhrSimpleRequestTransport`
      */
     activeRequests: Map<String|null, XhrSimpleRequestTransport|null>;
-
-    /**
-     * True while loading latest started requests.
-     */
-    readonly loading: boolean|null|undefined;
-
-    /**
-     * Latest used request object.
-     */
-    readonly lastRequest: XhrSimpleRequestTransport|null;
 
     /**
      * Appends headers to each request handled by this component.
@@ -110,9 +116,9 @@ declare namespace TransportElements {
      * `https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`
      */
     proxyEncodeUrl: boolean|null|undefined;
+    connectedCallback(): void;
     _attachListeners(node: any): void;
     _detachListeners(node: any): void;
-    ready(): void;
 
     /**
      * Creates instance of transport object with current configuration.

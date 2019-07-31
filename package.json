@@ -1,54 +1,79 @@
 {
+  "name": "@advanced-rest-client/xhr-simple-request",
   "description": "An XHR request that works with API components",
+  "version": "3.0.0",
+  "license": "Apache-2.0",
+  "main": "xhr-simple-request.js",
   "keywords": [
     "xhr",
     "request",
-    "api"
+    "api",
+    "api-console",
+    "api-components"
+  ],
+  "authors": [
+    "pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "contributors": [
+    "pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "repository": {
     "type": "git",
     "url": "git://github.com/advanced-rest-client/xhr-simple-request.git"
   },
-  "name": "@advanced-rest-client/xhr-simple-request",
-  "version": "3.0.0-preview.2",
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.5.1",
-    "@polymer/iron-component-page": "^4.0.0",
-    "@polymer/iron-demo-helpers": "^3.1.0",
-    "@polymer/iron-form": "^3.0.0",
-    "@polymer/paper-button": "^3.0.0",
-    "@polymer/paper-input": "^3.0.0",
-    "@polymer/paper-toast": "^3.0.0",
-    "@polymer/test-fixture": "^4.0.2",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "sinon": "^7.3.1",
-    "wct-mocha": "^1.0.0"
-  },
-  "authors": [
-    "pawel Psztyc",
-    "The Advanced REST client authors <arc@mulesoft.com>"
-  ],
-  "scripts": {
-    "lint": "polymer lint xhr-simple-request.html xhr-simple-request-transport.html",
-    "test-sauce": "polymer test --plugin sauce --job-name \"xhr-simple-request:local-test\"",
-    "test": "polymer test --plugin local",
-    "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
-  },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/xhr-simple-request/issues",
     "email": "arc@mulesoft.com"
   },
-  "main": "xhr-simple-request.js",
-  "contributors": [
-    "pawel Psztyc",
-    "The Advanced REST client authors <arc@mulesoft.com>"
-  ],
   "dependencies": {
-    "@advanced-rest-client/events-target-mixin": "^3.0.0-preview.3",
-    "@advanced-rest-client/headers-parser-mixin": "^3.0.0-preview.3",
-    "@polymer/polymer": "^3.2.0"
+    "@advanced-rest-client/events-target-mixin": "^3.0.0",
+    "@advanced-rest-client/headers-parser-mixin": "^3.0.0",
+    "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "@advanced-rest-client/arc-demo-helper": "^1.0.9",
+    "@advanced-rest-client/eslint-config": "^1.0.6",
+    "@advanced-rest-client/prettier-config": "^0.1.0",
+    "@advanced-rest-client/testing-karma-sl": "^1.0.2",
+    "@polymer/gen-typescript-declarations": "^1.6.2",
+    "@polymer/iron-form": "^3.0.0",
+    "@polymer/paper-button": "^3.0.0",
+    "@polymer/paper-input": "^3.0.2",
+    "@polymer/paper-toast": "^3.0.0",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^7.0.0",
+    "@open-wc/testing": "^2.2.1",
+    "@open-wc/testing-karma": "^3.1.5",
+    "sinon": "^7.3.2",
+    "deepmerge": "^4.0.0",
+    "es-dev-server": "^1.8.3",
+    "husky": "^1.0.0",
+    "karma": "^4.2.0",
+    "lint-staged": "^8.0.0"
+  },
+  "scripts": {
+    "test": "karma start --coverage",
+    "update-types": "gen-typescript-declarations --deleteExisting --outDir .",
+    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "start:compatibility": "es-dev-server --app-index demo/index.html --compatibility all --node-resolve --open --watch",
+    "lint:eslint": "eslint --ext .js,.html .",
+    "format:eslint": "eslint --ext .js,.html . --fix",
+    "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "format:prettier": "prettier \"**/*.js\" --write",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:legacy": "karma start --legacy --coverage",
+    "test:legacy:watch": "karma start --legacy --auto-watch=true --single-run=false",
+    "test:sl": "karma start karma.sl.config.js --legacy --coverage",
+    "generate-model": "node demo/model.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
