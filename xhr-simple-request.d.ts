@@ -5,12 +5,16 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   xhr-simple-request.html
+ *   xhr-simple-request.js
  */
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../events-target-behavior/events-target-behavior.d.ts" />
-/// <reference path="xhr-simple-request-transport.d.ts" />
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
+import {LitElement} from 'lit-element';
+
+import {EventsTargetMixin} from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
 
 declare namespace TransportElements {
 
@@ -55,8 +59,24 @@ declare namespace TransportElements {
    * with `isError` set to true.
    */
   class XhrSimpleRequest extends
-    ArcBehaviors.EventsTargetBehavior(
+    EventsTargetMixin(
     Object) {
+
+    /**
+     * True while loading latest started requests.
+     */
+    readonly loading: Boolean|null;
+
+    /**
+     * True while loading latest started requests.
+     */
+    _loading: boolean|null|undefined;
+    readonly lastRequest: any;
+
+    /**
+     * Latest used request object.
+     */
+    _lastRequest: XhrSimpleRequestTransport|null;
 
     /**
      * Map of active request objects.
@@ -64,16 +84,6 @@ declare namespace TransportElements {
      * `XhrSimpleRequestTransport`
      */
     activeRequests: Map<String|null, XhrSimpleRequestTransport|null>;
-
-    /**
-     * True while loading latest started requests.
-     */
-    readonly loading: boolean|null|undefined;
-
-    /**
-     * Latest used request object.
-     */
-    readonly lastRequest: XhrSimpleRequestTransport|null;
 
     /**
      * Appends headers to each request handled by this component.
@@ -106,9 +116,9 @@ declare namespace TransportElements {
      * `https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`
      */
     proxyEncodeUrl: boolean|null|undefined;
+    connectedCallback(): void;
     _attachListeners(node: any): void;
     _detachListeners(node: any): void;
-    ready(): void;
 
     /**
      * Creates instance of transport object with current configuration.
@@ -167,6 +177,9 @@ declare namespace TransportElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "xhr-simple-request": TransportElements.XhrSimpleRequest;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "xhr-simple-request": TransportElements.XhrSimpleRequest;
+  }
 }

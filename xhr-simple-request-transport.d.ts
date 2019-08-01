@@ -5,11 +5,16 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   xhr-simple-request-transport.html
+ *   xhr-simple-request-transport.js
  */
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../headers-parser-behavior/headers-parser-behavior.d.ts" />
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
+import {LitElement} from 'lit-element';
+
+import {HeadersParserMixin} from '@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js';
 
 declare namespace TransportElements {
 
@@ -23,24 +28,8 @@ declare namespace TransportElements {
    * It also handles custom events related to request flow.
    */
   class XhrSimpleRequestTransport extends
-    ArcBehaviors.HeadersParserBehavior(
+    HeadersParserMixin(
     Object) {
-
-    /**
-     * Succeeded is true if the request succeeded. The request succeeded if it
-     * loaded without error, wasn't aborted, and the status code is ≥ 200, and
-     * < 300, or if the status code is 0.
-     *
-     * The status code 0 is accepted as a success because some schemes - e.g.
-     * file:// - don't provide status codes.
-     */
-    readonly succeeded: boolean;
-
-    /**
-     * A reference to the XMLHttpRequest instance used to generate the
-     * network request.
-     */
-    readonly xhr: XMLHttpRequest|null;
 
     /**
      * A reference to the parsed response body, if the `xhr` has completely
@@ -57,12 +46,8 @@ declare namespace TransportElements {
     /**
      * A reference to the status code, if the `xhr` has completely resolved.
      */
-    readonly status: number|null|undefined;
-
-    /**
-     * A reference to the status text, if the `xhr` has completely resolved.
-     */
-    readonly statusText: string|null|undefined;
+    readonly status: Number|null;
+    readonly statusText: any;
 
     /**
      * A promise that resolves when the `xhr` response comes back, or rejects
@@ -79,23 +64,96 @@ declare namespace TransportElements {
      * An object that contains progress information emitted by the XHR if
      * available.
      */
-    readonly progress: object|null|undefined;
+    readonly progress: object|null;
 
     /**
      * Aborted will be true if an abort of the request is attempted.
      */
-    readonly aborted: boolean|null|undefined;
+    readonly aborted: Boolean|null;
+
+    /**
+     * Errored will be true if the browser fired an error event from the
+     * XHR object (mainly network errors).
+     *    
+     */
+    readonly errored: any;
+
+    /**
+     * Aborted will be true if an abort of the request is attempted.
+     *    
+     */
+    readonly timedOut: any;
+
+    /**
+     * Succeeded is true if the request succeeded. The request succeeded if it
+     * loaded without error, wasn't aborted, and the status code is ≥ 200, and
+     * < 300, or if the status code is 0.
+     *
+     * The status code 0 is accepted as a success because some schemes - e.g.
+     * file:// - don't provide status codes.
+     */
+    readonly succeeded: boolean;
+
+    /**
+     * A reference to the XMLHttpRequest instance used to generate the
+     * network request.
+     */
+    _xhr: XMLHttpRequest|null;
+
+    /**
+     * A reference to the parsed response body, if the `xhr` has completely
+     * resolved.
+     */
+    _response: any;
+
+    /**
+     * A reference to response headers, if the `xhr` has completely
+     * resolved.
+     */
+    _headers: String|null;
+
+    /**
+     * A reference to the status code, if the `xhr` has completely resolved.
+     */
+    _status: number|null|undefined;
+
+    /**
+     * A reference to the status text, if the `xhr` has completely resolved.
+     */
+    _statusText: string|null|undefined;
+
+    /**
+     * A promise that resolves when the `xhr` response comes back, or rejects
+     * if there is an error before the `xhr` completes.
+     * The resolve callback is called with the original request as an argument.
+     * By default, the reject callback is called with an `Error` as an argument.
+     * If `rejectWithRequest` is true, the reject callback is called with an
+     * object with two keys: `request`, the original request, and `error`, the
+     * error object.
+     */
+    _completes: Promise<any>|null;
+
+    /**
+     * An object that contains progress information emitted by the XHR if
+     * available.
+     */
+    _progress: object|null|undefined;
+
+    /**
+     * Aborted will be true if an abort of the request is attempted.
+     */
+    _aborted: boolean|null|undefined;
 
     /**
      * Errored will be true if the browser fired an error event from the
      * XHR object (mainly network errors).
      */
-    readonly errored: boolean|null|undefined;
+    _errored: boolean|null|undefined;
 
     /**
      * TimedOut will be true if the XHR threw a timeout event.
      */
-    readonly timedOut: boolean|null|undefined;
+    _timedOut: boolean|null|undefined;
 
     /**
      * Appends headers to each request handled by this component.
@@ -108,11 +166,6 @@ declare namespace TransportElements {
      * ```
      */
     appendHeaders: string|null|undefined;
-
-    /**
-     * Computed list of headers to add to each request.
-     */
-    readonly _addHeaders: Array<object|null>|null;
 
     /**
      * If set every request made from the console will be proxied by the service provided in this
@@ -133,7 +186,7 @@ declare namespace TransportElements {
      * `https://proxy.com/?url=http%3A%2F%2Fdomain.com%2Fpath%2F%3Fquery%3Dsome%2Bvalue`
      */
     proxyEncodeUrl: boolean|null|undefined;
-    ready(): void;
+    connectedCallback(): void;
 
     /**
      * Sends a request.
@@ -237,6 +290,9 @@ declare namespace TransportElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "xhr-simple-request-transport": TransportElements.XhrSimpleRequestTransport;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "xhr-simple-request-transport": TransportElements.XhrSimpleRequestTransport;
+  }
 }
