@@ -29,6 +29,7 @@ export class MockServer {
     this.mockSuccessPost();
     this.mockSuccessHeaders();
     this.mock404();
+    this.mockMultipart();
   }
   /**
    * Mocks success response
@@ -97,6 +98,21 @@ export class MockServer {
       xhr.respond(404, {
         'Content-Type': 'text/plain'
       }, 'e404');
+    });
+  }
+  /**
+   * Mocks multipart data response
+   */
+  mockMultipart() {
+    const url = 'http://multipart.domain.com/';
+    this.srv.respondWith('POST', url, (xhr) => {
+      const rsp = {
+        headers: xhr.requestHeaders,
+        payload: xhr.requestBody
+      };
+      xhr.respond(200, {
+        'Content-Type': 'text/plain'
+      }, JSON.stringify(rsp));
     });
   }
 }

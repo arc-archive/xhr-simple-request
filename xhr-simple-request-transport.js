@@ -283,7 +283,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     xhr.addEventListener('loadend', () => this._loadEndHandler());
     const url = this._appendProxy(options.url);
     xhr.open(options.method || 'GET', url, true);
-    this._applyHeaders(xhr, options.headers);
+    this._applyHeaders(xhr, options.headers, options.payload instanceof FormData);
     xhr.timeout = options.timeout;
     xhr.withCredentials = !!options.withCredentials;
     try {
@@ -298,8 +298,10 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
    *
    * @param {XMLHttpRequest} xhr
    * @param {?String} headers HTTP headers string
+   * @param {?Boolean} isFormData Prevents setting content-type header for
+   * Multipart requests.
    */
-  _applyHeaders(xhr, headers) {
+  _applyHeaders(xhr, headers, isFormData) {
     const fixed = this._computeAddHeaders(this.appendHeaders);
     const fixedNames = [];
     if (fixed && fixed.length) {
@@ -316,6 +318,9 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
       const data = this.headersToJSON(String(headers));
       data.forEach((item) => {
         if (fixedNames.indexOf(item.name) !== -1) {
+          return;
+        }
+        if (isFormData && item.name.toLowerCase() === 'content-type') {
           return;
         }
         try {

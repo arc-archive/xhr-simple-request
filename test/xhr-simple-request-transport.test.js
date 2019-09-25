@@ -375,6 +375,37 @@ describe('<xhr-simple-request-transport>', function() {
     });
   });
 
+  describe('Multipart request', () => {
+    let srv;
+    before(function() {
+      srv = new MockServer();
+      srv.createServer();
+    });
+
+    after(function() {
+      srv.restore();
+    });
+
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+    });
+
+    it('removes content type header', async () => {
+      const payload = new FormData();
+      payload.append('test', new Blob(['test']));
+      element.send({
+        url: 'http://multipart.domain.com/',
+        method: 'POST',
+        headers: 'x-test: true\ncontent-type: multipart/form-data',
+        payload
+      });
+      const result = await element.completes;
+      const data = JSON.parse(result.response);
+      assert.isUndefined(data.headers['content-type']);
+    });
+  });
+
   describe('a11y', () => {
     it('adds aria-hidden attribute', async () => {
       const element = await basicFixture();
