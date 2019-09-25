@@ -421,3 +421,12 @@
 
 
 
+## 3.0.1 (2019-09-25)
+
+
+### Bug Fixes
+
+* fixes setting multipart content type when CT header is defined ([aa3d7d6](https://github.com/advanced-rest-client/xhr-simple-request/commit/aa3d7d6))
+
+
+
