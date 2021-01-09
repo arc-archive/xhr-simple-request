@@ -1,4 +1,4 @@
-import sinon from 'sinon/pkg/sinon-esm.js';
+import sinon from 'sinon';
 
 /**
  * Mocking server for tests
@@ -13,12 +13,14 @@ export class MockServer {
     });
     this.mock();
   }
+
   /**
    * Restores XHR object.
    */
   restore() {
     this.srv.restore();
   }
+
   /**
    * Creates endpoints
    */
@@ -31,6 +33,7 @@ export class MockServer {
     this.mock404();
     this.mockMultipart();
   }
+
   /**
    * Mocks success response
    */
@@ -42,6 +45,7 @@ export class MockServer {
       }, 'test');
     });
   }
+
   /**
    * Mocks success response for JSON
    */
@@ -89,6 +93,7 @@ export class MockServer {
       }, JSON.stringify(xhr.requestHeaders));
     });
   }
+
   /**
    * Mocks 404 error response
    */
@@ -100,6 +105,7 @@ export class MockServer {
       }, 'e404');
     });
   }
+
   /**
    * Mocks multipart data response
    */

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
 @license
 Copyright 2018 The Advanced REST client authors <arc@mulesoft.com>
@@ -14,6 +15,9 @@ the License.
 import { LitElement } from 'lit-element';
 import { EventsTargetMixin } from '@advanced-rest-client/events-target-mixin/events-target-mixin.js';
 import './xhr-simple-request-transport.js';
+
+/** @typedef {import('./xhr-simple-request-transport').XhrSimpleRequestTransport} XhrSimpleRequestTransport */
+
 /**
  * `xhr-simple-request`
  * A XHR request that works with API components.
@@ -40,10 +44,10 @@ import './xhr-simple-request-transport.js';
  *
  * When response is ready the element dispatches `api-response` custom event
  * with following properties in the detail object.
- * - id (`String`) - Request incomming ID
+ * - id (`String`) - Request incoming ID
  * - request (`Object`) - Original request object from `api-request` event
  * - loadingTime (`Number`) - High precise timing used by the performance API
- * - isError (`Boolean`) - Indicates if the request is errored
+ * - isError (`Boolean`) - Indicates if the request is error
  * - error (`Error|undefined`) - Error object
  * - response (`Object`) - The response data:
  *  - status (`Number`) - Response status code
@@ -53,22 +57,14 @@ import './xhr-simple-request-transport.js';
  *
  * Please note that aborting the request always sends `api-response` event
  * with `isError` set to true.
- *
- * @customElement
- * @polymer
- * @demo demo/index.html
- * @appliesMixin EventsTargetMixin
- * @memberof TransportElements
  */
 class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
   static get properties() {
     return {
       /**
        * Map of active request objects.
-       * Keys in the map is request ID and vaue is instance of
+       * Keys in the map is the request ID and value is instance of the
        * `XhrSimpleRequestTransport`
-       *
-       * @type {Map<String, XhrSimpleRequestTransport>}
        */
       activeRequests: { type: Object },
       /**
@@ -77,8 +73,6 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
       _loading: { type: Boolean },
       /**
        * Latest used request object.
-       *
-       * @type {XhrSimpleRequestTransport}
        */
       _lastRequest: { type: Object },
       /**
@@ -127,11 +121,11 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
   }
 
   set _loading(value) {
-    const old = this._loading;
+    const old = this.__loading;
     if (old === value) {
       return;
     }
-    this._loading = old;
+    this.__loading = old;
     this.dispatchEvent(new CustomEvent('loading-changed', {
       detail: {
         value
@@ -163,9 +157,24 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
   constructor() {
     super();
     this._requestHandler = this._requestHandler.bind(this);
-    this._aborthHandler = this._aborthHandler.bind(this);
+    this._abortHandler = this._abortHandler.bind(this);
 
+    /**
+     * @type {Map<String, XhrSimpleRequestTransport>}
+     */
     this.activeRequests = new Map();
+    /**
+     * @type {string}
+     */
+    this.appendHeaders = undefined;
+    /**
+     * @type {string}
+     */
+    this.proxy = undefined;
+    /**
+     * @type {boolean}
+     */
+    this.proxyEncodeUrl = undefined;
   }
 
   connectedCallback() {
@@ -177,13 +186,14 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
 
   _attachListeners(node) {
     node.addEventListener('api-request', this._requestHandler);
-    node.addEventListener('abort-api-request', this._aborthHandler);
+    node.addEventListener('abort-api-request', this._abortHandler);
   }
 
   _detachListeners(node) {
     node.removeEventListener('api-request', this._requestHandler);
-    node.removeEventListener('abort-api-request', this._aborthHandler);
+    node.removeEventListener('abort-api-request', this._abortHandler);
   }
+
   /**
    * Creates instance of transport object with current configuration.
    * @return {XhrSimpleRequestTransport}
@@ -211,28 +221,29 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
     request.__opts = opts;
     this.activeRequests.set(opts.id, request);
 
+    request._startTime = performance.now();
     request.completes
     .then(() => this._responseHandler(opts.id))
-    .catch((error) => this._erroreHandler(error, opts.id))
+    .catch((error) => this._errorHandler(error, opts.id))
     .then(() => this._discardRequest(opts.id));
-    request._startTime = performance.now();
     request.send(opts);
 
     this._lastRequest = request;
     this._loading = true;
   }
+
   /**
    * Handler for `abort-api-request` event. Aborts the request and reports
-   * errored response.
+   * error response.
    * It expects the event to have `id` property set on the detail object.
    * @param {CustomEvent} e
    */
-  _aborthHandler(e) {
+  _abortHandler(e) {
     if (e.defaultPrevented) {
       return;
     }
     e.preventDefault();
-    const id = e.detail.id;
+    const { id } = e.detail;
     const request = this.activeRequests.get(id);
     if (!request) {
       return;
@@ -240,17 +251,18 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
     request.abort();
     // Error thrown by the abort event will clear the request.
   }
+
   /**
-   * Creates a detail object for `api-response` cutom event
+   * Creates a detail object for `api-response` custom event
    *
    * @param {XhrSimpleRequestTransport} request Request object
-   * @param {String} id Request original ID
+   * @param {string} id Request original ID
    * @return {Object} The value of the `detail` property.
    */
   _createDetail(request, id) {
     const loadingTime = performance.now() - request._startTime;
     const result = {
-      id: id,
+      id,
       request: request.__opts,
       response: {
         status: request.status,
@@ -258,14 +270,15 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
         payload: request.response,
         headers: request.headers
       },
-      loadingTime: loadingTime
+      loadingTime,
     };
     return result;
   }
+
   /**
    * Handles response from the transport.
    *
-   * @param {String} id Request ID
+   * @param {string} id Request ID
    */
   _responseHandler(id) {
     this._loading = false;
@@ -274,16 +287,16 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
     result.isError = false;
     this._notifyResponse(result);
   }
+
   /**
    * Handles transport error
    *
    * @param {Object} err Transport error object.
-   * @param {String} id Request ID
+   * @param {string} id Request ID
    */
-  _erroreHandler(err, id) {
+  _errorHandler(err, id) {
     this._loading = false;
-    /* global ProgressEvent */
-    let error = err.error;
+    let { error } = err;
     if (error instanceof ProgressEvent) {
       error = new Error('Unable to connect');
     }
@@ -293,6 +306,7 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
     result.error = error;
     this._notifyResponse(result);
   }
+
   /**
    * Dispatches `api-response` custom event.
    *
@@ -306,6 +320,7 @@ class XhrSimpleRequest extends EventsTargetMixin(LitElement) {
     });
     this.dispatchEvent(e);
   }
+
   /**
    * Removes request from active requests.
    *

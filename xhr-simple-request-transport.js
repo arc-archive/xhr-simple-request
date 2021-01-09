@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
 /**
 @license
 Copyright 2018 The Advanced REST client authors <arc@mulesoft.com>
@@ -12,8 +14,10 @@ License for the specific language governing permissions and limitations under
 the License.
 */
 import { LitElement } from 'lit-element';
-import { HeadersParserMixin } from '@advanced-rest-client/headers-parser-mixin/headers-parser-mixin.js';
-function noop() {}
+import { HeadersParser } from '@advanced-rest-client/arc-headers';
+
+/** @typedef {import('@advanced-rest-client/arc-types').FormTypes.FormItem} FormItem */
+
 /**
  * `xhr-simple-request`
  * A XHR request that works with API components.
@@ -22,38 +26,25 @@ function noop() {}
  * adjusted to work with `API request` object (or ARC request object).
  *
  * It also handles custom events related to request flow.
- *
- * @customElement
- * @polymer
- * @demo demo/index.html
- * @appliesMixin HeadersParserMixin
- * @memberof TransportElements
  */
-class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
+export class XhrSimpleRequestTransport extends LitElement {
   static get properties() {
     return {
       /**
        * A reference to the XMLHttpRequest instance used to generate the
        * network request.
-       *
-       * @type {XMLHttpRequest}
        */
       _xhr: { type: Object },
 
       /**
        * A reference to the parsed response body, if the `xhr` has completely
        * resolved.
-       *
-       * @type {*}
-       * @default null
        */
       _response: { type: Object },
 
       /**
        * A reference to response headers, if the `xhr` has completely
        * resolved.
-       *
-       * @type {String}
        * @default undefined
        */
       _headers: { type: Object },
@@ -75,16 +66,12 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
        * If `rejectWithRequest` is true, the reject callback is called with an
        * object with two keys: `request`, the original request, and `error`, the
        * error object.
-       *
-       * @type {Promise}
        */
       _completes: { type: Object },
 
       /**
        * An object that contains progress information emitted by the XHR if
        * available.
-       *
-       * @default {}
        */
       _progress: { type: Object },
 
@@ -94,7 +81,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
       _aborted: { type: Boolean },
 
       /**
-       * Errored will be true if the browser fired an error event from the
+       * It is true when the browser fired an error event from the
        * XHR object (mainly network errors).
        */
       _errored: { type: Boolean },
@@ -134,31 +121,27 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
       proxyEncodeUrl: { type: Boolean }
     };
   }
+
   /**
    * A reference to the parsed response body, if the `xhr` has completely
    * resolved.
-   *
-   * @return {*}
-   * @default null
    */
   get response() {
     return this._response;
   }
+
   /**
    * A reference to response headers, if the `xhr` has completely
    * resolved.
-   *
-   * @return {String}
-   * @default undefined
    */
   get headers() {
     return this._headers;
   }
+
   /**
    * A reference to the status code, if the `xhr` has completely resolved.
    *
-   * @return {Number}
-   * @default 0
+   * @returns {number}
    */
   get status() {
     return this._status;
@@ -167,6 +150,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
   get statusText() {
     return this._statusText;
   }
+
   /**
    * A promise that resolves when the `xhr` response comes back, or rejects
    * if there is an error before the `xhr` completes.
@@ -181,6 +165,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
   get completes() {
     return this._completes;
   }
+
   /**
    * An object that contains progress information emitted by the XHR if
    * available.
@@ -191,22 +176,25 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
   get progress() {
     return this._progress;
   }
+
   /**
    * Aborted will be true if an abort of the request is attempted.
    *
    * @default false
-   * @return {Boolean}
+   * @return {boolean}
    */
   get aborted() {
     return this._aborted;
   }
+
   /**
-   * Errored will be true if the browser fired an error event from the
+   * Error will be true if the browser fired an error event from the
    * XHR object (mainly network errors).
    */
   get errored() {
     return this._errored;
   }
+
   /**
    * Aborted will be true if an abort of the request is attempted.
    */
@@ -220,6 +208,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     this._response = null;
     this._status = 0;
     this._statusText = '';
+    this.appendHeaders = undefined;
     this._completes = new Promise((resolve, reject) => {
       this.resolveCompletes = resolve;
       this.rejectCompletes = reject;
@@ -228,6 +217,8 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     this._aborted = false;
     this._errored = false;
     this._timedOut = false;
+    this.proxy = undefined;
+    this.proxyEncodeUrl = false;
   }
 
   connectedCallback() {
@@ -236,6 +227,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     }
     this.setAttribute('aria-hidden', 'true');
   }
+
   /**
    * Succeeded is true if the request succeeded. The request succeeded if it
    * loaded without error, wasn't aborted, and the status code is ≥ 200, and
@@ -256,6 +248,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     // for all outcomes (successful or otherwise).
     return status === 0 || (status >= 200 && status < 300);
   }
+
   /**
    * Sends a request.
    *
@@ -293,6 +286,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     }
     return this.completes;
   }
+
   /**
    * Applies headers to the XHR object.
    *
@@ -310,12 +304,12 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
         try {
           xhr.setRequestHeader(item.name, item.value);
         } catch (e) {
-          noop();
+          // ..
         }
       });
     }
     if (headers) {
-      const data = this.headersToJSON(String(headers));
+      const data = HeadersParser.toJSON(String(headers));
       data.forEach((item) => {
         if (fixedNames.indexOf(item.name) !== -1) {
           return;
@@ -326,11 +320,12 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
         try {
           xhr.setRequestHeader(item.name, item.value);
         } catch (e) {
-          noop();
+          // ..
         }
       });
     }
   }
+  
   /**
    * Handler for the XHR `progress` event.
    * It sets `progress` property and dispatches `api-request-progress-changed`
@@ -357,6 +352,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     });
     this.dispatchEvent(e);
   }
+
   /**
    * Handler for XHR `error` event.
    *
@@ -376,6 +372,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     };
     this.rejectCompletes(response);
   }
+
   /**
    * Handler for XHR `timeout` event.
    *
@@ -390,10 +387,9 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     };
     this.rejectCompletes(response);
   }
+
   /**
    * Handler for XHR `abort` event.
-   *
-   * @param {ProgressEvent} error https://xhr.spec.whatwg.org/#event-xhr-abort
    */
   _abortHandler() {
     this._aborted = true;
@@ -405,10 +401,9 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     };
     this.rejectCompletes(response);
   }
+
   /**
    * Handler for XHR `loadend` event.
-   *
-   * @param {ProgressEvent} error https://xhr.spec.whatwg.org/#event-xhr-loadend
    */
   _loadEndHandler() {
     if (this.aborted || this.timedOut) {
@@ -418,9 +413,9 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     this._headers = this.collectHeaders();
     this._response = this.parseResponse();
     if (!this.succeeded) {
-      const error = new Error('The request failed with status code: ' + this._xhr.status);
+      const error = new Error(`The request failed with status code: ${  this._xhr.status}`);
       const response = {
-        error: error,
+        error,
         request: this._xhr,
         headers: this.headers
       };
@@ -432,6 +427,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
       });
     }
   }
+  
   /**
    * Aborts the request.
    */
@@ -447,6 +443,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     this._status = this._xhr.status;
     this._statusText = (this._xhr.statusText === undefined ? '' : this._xhr.statusText);
   }
+
   /**
    * Attempts to parse the response body of the XHR. If parsing succeeds,
    * the value returned will be deserialized based on the `responseType`
@@ -463,7 +460,7 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
    */
   parseResponse() {
     const xhr = this._xhr;
-    const responseType = xhr.responseType || xhr._responseType;
+    const { responseType } = xhr;
     const preferResponseText = !xhr.responseType;
     try {
       switch (responseType) {
@@ -480,7 +477,6 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
             try {
               return JSON.parse(xhr.responseText);
             } catch (_) {
-              noop();
               return null;
             }
           }
@@ -498,9 +494,11 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
         }
       }
     } catch (e) {
-      this.rejectCompletes(new Error('Could not parse response. ' + e.message));
+      this.rejectCompletes(new Error(`Could not parse response. ${  e.message}`));
     }
+    return undefined;
   }
+
   /**
    * Collects response headers string from the XHR object.
    *
@@ -511,30 +509,32 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     try {
       data = this._xhr.getAllResponseHeaders();
     } catch (_) {
-      noop();
+      // ...
     }
     return data;
   }
+
   /**
    * Computes value for `_addHeaders` property.
    * A list of headers to add to each request.
-   * @param {?String} headers Headers string
-   * @return {Array<Object>|undefined}
+   * @param {string} headers Headers string
+   * @return {FormItem[]|undefined}
    */
   _computeAddHeaders(headers) {
     if (!headers) {
-      return;
+      return undefined;
     }
     headers = String(headers).replace('\\n', '\n');
-    return this.headersToJSON(headers);
+    return HeadersParser.toJSON(headers);
   }
+
   /**
    * Sets the proxy URL if the `proxy` property is set.
-   * @param {String} url Request URL to alter if needed.
-   * @return {String} The URL to use with request.
+   * @param {string} url Request URL to alter if needed.
+   * @return {string} The URL to use with request.
    */
   _appendProxy(url) {
-    const proxy = this.proxy;
+    const { proxy } = this;
     if (!proxy) {
       return url;
     }
@@ -542,17 +542,6 @@ class XhrSimpleRequestTransport extends HeadersParserMixin(LitElement) {
     result = proxy + result;
     return result;
   }
-  /**
-   * @event api-request-progress-changed
-   *
-   * Dispatched with XHR progress event
-   *
-   * @param {Object} value Object with progress properties:
-   * - `lengthComputable`
-   * - `loaded`
-   * - `total`
-   * See https://xhr.spec.whatwg.org/#progressevent for more info.
-   */
 }
 
 window.customElements.define('xhr-simple-request-transport', XhrSimpleRequestTransport);

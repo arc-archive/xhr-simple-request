@@ -15,9 +15,9 @@ It handles `api-request` and `abort-api-request` custom events that controls req
 <xhr-simple-request></xhr-simple-request>
 ```
 
-### API components
+## Deprecation notice
 
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
+This component has been moved to `api-request`. Once the new version of API Console is released this project will be archived.
 
 ## Usage
 
