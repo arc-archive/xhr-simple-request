@@ -1,10 +1,8 @@
-[![Published on NPM](https://img.shields.io/npm/v/@advanced-rest-client/xhr-simple-request.svg)](https://www.npmjs.com/package/@advanced-rest-client/xhr-simple-request)
+# DEPRECATED
 
-[![Build Status](https://travis-ci.org/advanced-rest-client/xhr-simple-request.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/xhr-simple-request)
+This component is deprecated. The code base has been moved to [api-request](https://github.com/advanced-rest-client/api-request) module.
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/xhr-simple-request)
-
-## &lt;xhr-simple-request&gt;
+-----
 
 An XHR request that works with API components.
 

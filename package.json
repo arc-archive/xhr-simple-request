@@ -1,7 +1,7 @@
 {
   "name": "@advanced-rest-client/xhr-simple-request",
   "description": "An XHR request that works with API components",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "license": "Apache-2.0",
   "main": "xhr-simple-request.js",
   "keywords": [
@@ -28,25 +28,25 @@
     "email": "arc@mulesoft.com"
   },
   "dependencies": {
-    "@advanced-rest-client/events-target-mixin": "^3.2.3",
-    "@advanced-rest-client/arc-headers": "^0.1.7",
-    "lit-element": "^2.4.0"
+    "@advanced-rest-client/arc-headers": "^0.1.10",
+    "@advanced-rest-client/events-target-mixin": "^3.2.4",
+    "lit-element": "^2.5.1"
   },
   "devDependencies": {
-    "@advanced-rest-client/arc-demo-helper": "^2.2.5",
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@open-wc/eslint-config": "^4.0.1",
-    "@open-wc/testing": "^2.5.32",
-    "@web/dev-server": "^0.1.3",
-    "@web/test-runner": "^0.11.7",
-    "@web/test-runner-playwright": "^0.7.2",
-    "eslint": "^7.16.0",
-    "eslint-config-prettier": "^7.1.0",
-    "husky": "^4.3.6",
-    "lint-staged": "^10.5.3",
-    "sinon": "^9.2.3",
-    "typescript": "^4.1.3",
+    "@advanced-rest-client/arc-demo-helper": "^3.0.3",
+    "@commitlint/cli": "^13.2.0",
+    "@commitlint/config-conventional": "^13.2.0",
+    "@open-wc/eslint-config": "^4.3.0",
+    "@open-wc/testing": "^2.5.33",
+    "@web/dev-server": "^0.1.24",
+    "@web/test-runner": "^0.13.18",
+    "@web/test-runner-playwright": "^0.8.8",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "sinon": "^11.1.2",
+    "typescript": "^4.4.3",
     "typescript-lit-html-plugin": "^0.9.0"
   },
   "scripts": {
